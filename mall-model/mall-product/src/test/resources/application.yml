@@ -1,0 +1,31 @@
+server:
+  port: 8080
+mybatis-plus:
+  configuration:
+    default-enum-type-handler: org.apache.ibatis.type.EnumTypeHandler
+  type-enums-package: com.ethan.worldwide.mall.product.infra.dao.enums
+spring:
+  application:
+    name: mall-product
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:test
+    username: sa
+    password: 123456
+    schema: classpath:sql/table/*.sql
+    data: classpath:sql/data/*.sql
+    platform: h2
+    hikari:
+      minimum-idle: 5 # 池中最小空闲连接数量，默认值10
+      idle-timeout: 600000 # 空闲时间
+      maximum-pool-size: 10 # 池中的最大连接数（包括空闲和正在使用的连接）
+      auto-commit: true # 是否自动提交池中返回的连接
+      pool-name: myHikariCP # 连接池的名字
+      max-lifetime: 1800000 # 连接池中连接的最大生命周期
+      connection-timeout: 30000 # 连接超时时间。默认30s
+      connection-test-query: select 1
+  h2:
+    console:
+      path: /h2
+      enabled: true
+
