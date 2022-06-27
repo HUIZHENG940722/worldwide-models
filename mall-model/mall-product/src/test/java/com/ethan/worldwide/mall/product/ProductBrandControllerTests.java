@@ -14,9 +14,6 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
  */
 public class ProductBrandControllerTests extends MallProductApplicationTests {
 
-    @Autowired
-    private MockMvc mockMvc;
-
     /**
      * 创建商品品牌成功单元测试
      */
@@ -44,5 +41,14 @@ public class ProductBrandControllerTests extends MallProductApplicationTests {
         createProductBrandReq.setPicUrl("http://dummyimage.com/400x400");
         createProductBrandReq.setDescription("几乎没人一台");
         return createProductBrandReq;
+    }
+
+    @Test
+    public void getProductBrandContentSuccess() throws Exception {
+        String contentAsString = post("/product/brand", buildSuccessCreateProductBrandReq())
+            .andExpect(MockMvcResultMatchers.status().isCreated()).andReturn().getResponse()
+            .getContentAsString();
+        Assertions.assertNotNull(contentAsString);
+        get("/product/brand/{brand_id}".replace("{brand_id}", contentAsString)).andExpect(MockMvcResultMatchers.status().isOk());
     }
 }

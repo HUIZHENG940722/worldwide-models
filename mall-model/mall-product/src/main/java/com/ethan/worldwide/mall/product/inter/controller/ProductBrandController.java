@@ -1,6 +1,7 @@
 package com.ethan.worldwide.mall.product.inter.controller;
 
 import com.ethan.worldwide.mall.product.application.service.ProductBrandService;
+import com.ethan.worldwide.mall.product.domain.bo.ContentProductBrandBo;
 import com.ethan.worldwide.mall.product.domain.bo.CreateProductBrandBo;
 import com.ethan.worldwide.mall.product.infra.exception.MallProductServiceException;
 import com.ethan.worldwide.mall.product.inter.assembler.ProductBrandDtoConvert;
@@ -39,7 +40,15 @@ public class ProductBrandController implements MallProductBrandApi {
 
     @Override
     public ResponseEntity<ContentProductBrandResp> getProductBrandContent(Integer brandId) {
-        return null;
+        // 1 数据转换
+        // 2 业务
+        ContentProductBrandBo contentProductBrandBo = productBrandService.getProductBrandContent(brandId);
+        // 3 返回结果
+        if (contentProductBrandBo == null) {
+            MallProductServiceException.assertException(HttpStatus.NOT_FOUND, "获取商品品牌失败");
+        }
+        ContentProductBrandResp contentProductBrandResp = ProductBrandDtoConvert.INSTANCE.toContentResp(contentProductBrandBo);
+        return new ResponseEntity<>(contentProductBrandResp, HttpStatus.OK);
     }
 
     @Override
