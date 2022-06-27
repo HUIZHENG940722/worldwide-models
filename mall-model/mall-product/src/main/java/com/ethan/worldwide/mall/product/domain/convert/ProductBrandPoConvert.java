@@ -9,6 +9,8 @@ import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 import org.mapstruct.factory.Mappers;
 
+import java.util.List;
+
 /**
  * @author zhenghui
  * @Description 商品品牌PO转换器
@@ -36,4 +38,6 @@ public interface ProductBrandPoConvert {
         @Mapping(target = "updateTime", expression = "java(new java.util.Date(System.currentTimeMillis()))")
     })
     ProductBrandPo updateBoToPo(UpdateProductBrandBo updateProductBrandBo);
+
+    List<ContentProductBrandBo> toContentBo(List<ProductBrandPo> records);
 }

@@ -3,8 +3,11 @@ package com.ethan.worldwide.mall.product.domain.repository;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.ethan.worldwide.mall.product.domain.bo.ContentProductBrandBo;
 import com.ethan.worldwide.mall.product.domain.bo.CreateProductBrandBo;
+import com.ethan.worldwide.mall.product.domain.bo.PageProductBrandBo;
+import com.ethan.worldwide.mall.product.domain.bo.PageQueryProductBrandBo;
 import com.ethan.worldwide.mall.product.domain.bo.QueryProductBrandBo;
 import com.ethan.worldwide.mall.product.domain.bo.UpdateProductBrandBo;
 import com.ethan.worldwide.mall.product.domain.convert.ProductBrandPoConvert;
@@ -46,6 +49,25 @@ public class ProductBrandRepository {
         ProductBrandPo productBrandPo = ProductBrandPoConvert.INSTANCE.updateBoToPo(updateProductBrandBo);
         productBrandPo.setId(id);
         return productBrandMapper.updateById(productBrandPo);
+    }
+
+    public PageProductBrandBo page(PageQueryProductBrandBo pageQueryProductBrandBo) {
+        LambdaQueryWrapper<ProductBrandPo> lambdaQueryWrapper = getLambdaQueryWrapper();
+        if (pageQueryProductBrandBo.getId()!=null) {
+            lambdaQueryWrapper.eq(ProductBrandPo::getId, pageQueryProductBrandBo.getId());
+        }
+        if (pageQueryProductBrandBo.getStatus()!=null) {
+            lambdaQueryWrapper.eq(ProductBrandPo::getStatus, pageQueryProductBrandBo.getStatus());
+        }
+        if (StrUtil.isNotEmpty(pageQueryProductBrandBo.getName()) && StrUtil.isNotBlank(pageQueryProductBrandBo.getName().trim())) {
+            lambdaQueryWrapper.eq(ProductBrandPo::getName, pageQueryProductBrandBo.getName());
+        }
+        Page<ProductBrandPo> objectPage = new Page<>(pageQueryProductBrandBo.getPageNo(), pageQueryProductBrandBo.getPageSize());
+        Page<ProductBrandPo> productBrandPoPage = productBrandMapper.selectPage(objectPage, lambdaQueryWrapper);
+        PageProductBrandBo pageProductBrandBo = new PageProductBrandBo();
+        pageProductBrandBo.setTotal(pageProductBrandBo.getTotal());
+        pageProductBrandBo.setData(ProductBrandPoConvert.INSTANCE.toContentBo(productBrandPoPage.getRecords()));
+        return pageProductBrandBo;
     }
 
     private LambdaQueryWrapper<ProductBrandPo> getLambdaQueryWrapper() {

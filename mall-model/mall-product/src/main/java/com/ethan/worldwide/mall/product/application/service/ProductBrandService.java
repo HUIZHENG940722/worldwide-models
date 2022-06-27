@@ -2,6 +2,8 @@ package com.ethan.worldwide.mall.product.application.service;
 
 import com.ethan.worldwide.mall.product.domain.bo.ContentProductBrandBo;
 import com.ethan.worldwide.mall.product.domain.bo.CreateProductBrandBo;
+import com.ethan.worldwide.mall.product.domain.bo.PageProductBrandBo;
+import com.ethan.worldwide.mall.product.domain.bo.PageQueryProductBrandBo;
 import com.ethan.worldwide.mall.product.domain.bo.QueryProductBrandBo;
 import com.ethan.worldwide.mall.product.domain.bo.UpdateProductBrandBo;
 import com.ethan.worldwide.mall.product.domain.service.ProductBrandDomainService;
@@ -58,6 +60,19 @@ public class ProductBrandService {
         // 1 校验
         // 2 业务
         return productBrandDomainService.updateById(brandId, updateProductBrandBo);
+        // 3 返回结果
+    }
+
+    /**
+     * 分页获取商品品牌
+     *
+     * @param pageQueryProductBrandBo
+     * @return
+     */
+    public PageProductBrandBo pageProductBrandContent(PageQueryProductBrandBo pageQueryProductBrandBo) {
+        // 1 校验
+        // 2 业务
+        return productBrandDomainService.page(pageQueryProductBrandBo);
         // 3 返回结果
     }
 }

@@ -2,6 +2,8 @@ package com.ethan.worldwide.mall.product.domain.service;
 
 import com.ethan.worldwide.mall.product.domain.bo.ContentProductBrandBo;
 import com.ethan.worldwide.mall.product.domain.bo.CreateProductBrandBo;
+import com.ethan.worldwide.mall.product.domain.bo.PageProductBrandBo;
+import com.ethan.worldwide.mall.product.domain.bo.PageQueryProductBrandBo;
 import com.ethan.worldwide.mall.product.domain.bo.QueryProductBrandBo;
 import com.ethan.worldwide.mall.product.domain.bo.UpdateProductBrandBo;
 import com.ethan.worldwide.mall.product.domain.repository.ProductBrandRepository;
@@ -57,6 +59,13 @@ public class ProductBrandDomainService {
         // 3 返回结果
     }
 
+    /**
+     * 更新商品品牌内容
+     *
+     * @param id
+     * @param updateProductBrandBo
+     * @return
+     */
     @Transactional
     public Integer updateById(Integer id, UpdateProductBrandBo updateProductBrandBo) {
         // 1 核心校验
@@ -72,12 +81,26 @@ public class ProductBrandDomainService {
             QueryProductBrandBo queryByName = new QueryProductBrandBo();
             queryByName.setName(updateProductBrandBo.getName());
             ContentProductBrandBo byName = productBrandRepository.get(queryByName);
-            if (byName!=null && !byName.getId().equals(id)) {
+            if (byName != null && !byName.getId().equals(id)) {
                 MallProductServiceException.assertException(HttpStatus.CONFLICT, "商品品牌名称重复");
             }
         }
         // 2 核心业务
         return productBrandRepository.updateById(id, updateProductBrandBo);
+        // 3 返回结果
+    }
+
+
+    /**
+     * 分页获取商品品牌内容
+     *
+     * @param pageQueryProductBrandBo
+     * @return
+     */
+    public PageProductBrandBo page(PageQueryProductBrandBo pageQueryProductBrandBo) {
+        // 1 核心校验
+        // 2 核心业务
+        return productBrandRepository.page(pageQueryProductBrandBo);
         // 3 返回结果
     }
 }

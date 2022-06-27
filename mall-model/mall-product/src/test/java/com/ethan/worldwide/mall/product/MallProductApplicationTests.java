@@ -32,6 +32,11 @@ class MallProductApplicationTests {
         return mockMvc.perform(MockMvcRequestBuilders.get(url));
     }
 
+    protected ResultActions get(String url, Object body) throws Exception {
+        return mockMvc.perform(MockMvcRequestBuilders.get(url).contentType(MediaType.APPLICATION_JSON_VALUE)
+            .content(JSONUtil.toJsonStr(body)));
+    }
+
     protected ResultActions delete(String url) throws Exception {
         return mockMvc.perform(MockMvcRequestBuilders.delete(url));
     }

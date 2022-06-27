@@ -1,6 +1,8 @@
 package com.ethan.worldwide.mall.product;
 
 import com.ethan.worldwide.openapi.interfaces.api.dto.CreateProductBrandReq;
+import com.ethan.worldwide.openapi.interfaces.api.dto.PageQueryProductBrandReq;
+import com.ethan.worldwide.openapi.interfaces.api.dto.StatusEnum;
 import com.ethan.worldwide.openapi.interfaces.api.dto.UpdateProductBrandReq;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -102,5 +104,22 @@ public class ProductBrandControllerTests extends MallProductApplicationTests {
         updateProductBrandReq.setDescription("几乎没人一台");
         updateProductBrandReq.picUrl("http://dummyimage.com/400x4003");
         return updateProductBrandReq;
+    }
+
+    @Test
+    public void pageProductBrandContentSuccess() throws Exception {
+        post("/product/brand", buildSuccessCreateProductBrandReq())
+            .andExpect(MockMvcResultMatchers.status().isCreated()).andReturn().getResponse()
+            .getContentAsString();
+        get("/product/brand/page", buildPageQueryProductBrandReq()).andExpect(MockMvcResultMatchers.status().isOk());
+    }
+
+    private PageQueryProductBrandReq buildPageQueryProductBrandReq() {
+        PageQueryProductBrandReq pageQueryProductBrandReq = new PageQueryProductBrandReq();
+        pageQueryProductBrandReq.setPageNo(1);
+        pageQueryProductBrandReq.setPageSize(10);
+        pageQueryProductBrandReq.setName("手机");
+        pageQueryProductBrandReq.setStatus(StatusEnum.NUMBER_1);
+        return pageQueryProductBrandReq;
     }
 }

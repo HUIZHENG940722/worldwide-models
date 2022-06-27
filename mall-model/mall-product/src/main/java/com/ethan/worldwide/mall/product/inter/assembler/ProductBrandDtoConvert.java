@@ -2,9 +2,13 @@ package com.ethan.worldwide.mall.product.inter.assembler;
 
 import com.ethan.worldwide.mall.product.domain.bo.ContentProductBrandBo;
 import com.ethan.worldwide.mall.product.domain.bo.CreateProductBrandBo;
+import com.ethan.worldwide.mall.product.domain.bo.PageProductBrandBo;
+import com.ethan.worldwide.mall.product.domain.bo.PageQueryProductBrandBo;
 import com.ethan.worldwide.mall.product.domain.bo.UpdateProductBrandBo;
 import com.ethan.worldwide.openapi.interfaces.api.dto.ContentProductBrandResp;
 import com.ethan.worldwide.openapi.interfaces.api.dto.CreateProductBrandReq;
+import com.ethan.worldwide.openapi.interfaces.api.dto.PageProductBrandResp;
+import com.ethan.worldwide.openapi.interfaces.api.dto.PageQueryProductBrandReq;
 import com.ethan.worldwide.openapi.interfaces.api.dto.UpdateProductBrandReq;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -30,4 +34,8 @@ public interface ProductBrandDtoConvert {
     ContentProductBrandResp toContentResp(ContentProductBrandBo contentProductBrandBo);
 
     UpdateProductBrandBo toBo(UpdateProductBrandReq updateProductBrandReq);
+
+    PageQueryProductBrandBo toBo(PageQueryProductBrandReq pageQueryProductBrandReq);
+
+    PageProductBrandResp toPageContent(PageProductBrandBo pageProductBrandBo);
 }

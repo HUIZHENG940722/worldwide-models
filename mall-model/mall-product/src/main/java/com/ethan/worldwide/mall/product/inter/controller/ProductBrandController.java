@@ -3,11 +3,17 @@ package com.ethan.worldwide.mall.product.inter.controller;
 import com.ethan.worldwide.mall.product.application.service.ProductBrandService;
 import com.ethan.worldwide.mall.product.domain.bo.ContentProductBrandBo;
 import com.ethan.worldwide.mall.product.domain.bo.CreateProductBrandBo;
+import com.ethan.worldwide.mall.product.domain.bo.PageProductBrandBo;
+import com.ethan.worldwide.mall.product.domain.bo.PageQueryProductBrandBo;
 import com.ethan.worldwide.mall.product.domain.bo.UpdateProductBrandBo;
 import com.ethan.worldwide.mall.product.infra.exception.MallProductServiceException;
 import com.ethan.worldwide.mall.product.inter.assembler.ProductBrandDtoConvert;
 import com.ethan.worldwide.openapi.interfaces.api.MallProductBrandApi;
-import com.ethan.worldwide.openapi.interfaces.api.dto.*;
+import com.ethan.worldwide.openapi.interfaces.api.dto.ContentProductBrandResp;
+import com.ethan.worldwide.openapi.interfaces.api.dto.CreateProductBrandReq;
+import com.ethan.worldwide.openapi.interfaces.api.dto.PageProductBrandResp;
+import com.ethan.worldwide.openapi.interfaces.api.dto.PageQueryProductBrandReq;
+import com.ethan.worldwide.openapi.interfaces.api.dto.UpdateProductBrandReq;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -53,8 +59,14 @@ public class ProductBrandController implements MallProductBrandApi {
     }
 
     @Override
-    public ResponseEntity<PageProductBrandResp> pageProductBrandContent(String contentType, PageQueryProductBrandReq pageQueryProductBrandReq) {
-        return null;
+    public ResponseEntity<PageProductBrandResp> pageProductBrandContent(PageQueryProductBrandReq pageQueryProductBrandReq) {
+        // 1 数据转换
+        PageQueryProductBrandBo pageQueryProductBrandBo = ProductBrandDtoConvert.INSTANCE.toBo(pageQueryProductBrandReq);
+        // 2 业务
+        PageProductBrandBo pageProductBrandBo = productBrandService.pageProductBrandContent(pageQueryProductBrandBo);
+        // 3 返回结果
+        PageProductBrandResp pageProductBrandResp = ProductBrandDtoConvert.INSTANCE.toPageContent(pageProductBrandBo);
+        return new ResponseEntity<>(pageProductBrandResp, HttpStatus.OK);
     }
 
     @Override
