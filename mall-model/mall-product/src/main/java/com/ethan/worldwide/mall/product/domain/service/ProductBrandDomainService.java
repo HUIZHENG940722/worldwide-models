@@ -3,6 +3,7 @@ package com.ethan.worldwide.mall.product.domain.service;
 import com.ethan.worldwide.mall.product.domain.bo.ContentProductBrandBo;
 import com.ethan.worldwide.mall.product.domain.bo.CreateProductBrandBo;
 import com.ethan.worldwide.mall.product.domain.bo.QueryProductBrandBo;
+import com.ethan.worldwide.mall.product.domain.bo.UpdateProductBrandBo;
 import com.ethan.worldwide.mall.product.domain.repository.ProductBrandRepository;
 import com.ethan.worldwide.mall.product.infra.exception.MallProductServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,6 +54,30 @@ public class ProductBrandDomainService {
         // 1 核心校验
         // 2 核心业务
         return productBrandRepository.get(queryProductBrandBo);
+        // 3 返回结果
+    }
+
+    @Transactional
+    public Integer updateById(Integer id, UpdateProductBrandBo updateProductBrandBo) {
+        // 1 核心校验
+        // 1.1 校验品牌是否存在
+        QueryProductBrandBo queryById = new QueryProductBrandBo();
+        queryById.setId(id);
+        ContentProductBrandBo byId = productBrandRepository.get(queryById);
+        if (byId == null) {
+            MallProductServiceException.assertException(HttpStatus.CONFLICT, "商品品牌不存在");
+        }
+        // 1.2 校验商品品牌名称是否重复
+        if (updateProductBrandBo.getName() != null) {
+            QueryProductBrandBo queryByName = new QueryProductBrandBo();
+            queryByName.setName(updateProductBrandBo.getName());
+            ContentProductBrandBo byName = productBrandRepository.get(queryByName);
+            if (byName!=null && !byName.getId().equals(id)) {
+                MallProductServiceException.assertException(HttpStatus.CONFLICT, "商品品牌名称重复");
+            }
+        }
+        // 2 核心业务
+        return productBrandRepository.updateById(id, updateProductBrandBo);
         // 3 返回结果
     }
 }

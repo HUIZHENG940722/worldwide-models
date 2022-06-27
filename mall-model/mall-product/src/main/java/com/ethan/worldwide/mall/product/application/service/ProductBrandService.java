@@ -3,6 +3,7 @@ package com.ethan.worldwide.mall.product.application.service;
 import com.ethan.worldwide.mall.product.domain.bo.ContentProductBrandBo;
 import com.ethan.worldwide.mall.product.domain.bo.CreateProductBrandBo;
 import com.ethan.worldwide.mall.product.domain.bo.QueryProductBrandBo;
+import com.ethan.worldwide.mall.product.domain.bo.UpdateProductBrandBo;
 import com.ethan.worldwide.mall.product.domain.service.ProductBrandDomainService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,6 +32,12 @@ public class ProductBrandService {
         return productBrandDomainService.create(createProductBrandBo);
     }
 
+    /**
+     * 获取商品品牌内容
+     *
+     * @param brandId
+     * @return
+     */
     public ContentProductBrandBo getProductBrandContent(Integer brandId) {
         // 1 校验
         // 2 业务
@@ -38,5 +45,19 @@ public class ProductBrandService {
         queryProductBrandBo.setId(brandId);
         // 3 返回结果
         return productBrandDomainService.get(queryProductBrandBo);
+    }
+
+    /**
+     * 更新商品品牌
+     *
+     * @param brandId
+     * @param updateProductBrandBo
+     * @return
+     */
+    public Integer updateProductById(Integer brandId, UpdateProductBrandBo updateProductBrandBo) {
+        // 1 校验
+        // 2 业务
+        return productBrandDomainService.updateById(brandId, updateProductBrandBo);
+        // 3 返回结果
     }
 }

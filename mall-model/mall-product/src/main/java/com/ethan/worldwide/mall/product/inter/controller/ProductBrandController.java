@@ -3,6 +3,7 @@ package com.ethan.worldwide.mall.product.inter.controller;
 import com.ethan.worldwide.mall.product.application.service.ProductBrandService;
 import com.ethan.worldwide.mall.product.domain.bo.ContentProductBrandBo;
 import com.ethan.worldwide.mall.product.domain.bo.CreateProductBrandBo;
+import com.ethan.worldwide.mall.product.domain.bo.UpdateProductBrandBo;
 import com.ethan.worldwide.mall.product.infra.exception.MallProductServiceException;
 import com.ethan.worldwide.mall.product.inter.assembler.ProductBrandDtoConvert;
 import com.ethan.worldwide.openapi.interfaces.api.MallProductBrandApi;
@@ -58,6 +59,14 @@ public class ProductBrandController implements MallProductBrandApi {
 
     @Override
     public ResponseEntity<Integer> updateProductBrand(Integer brandId, UpdateProductBrandReq updateProductBrandReq) {
-        return null;
+        // 1 数据转换
+        UpdateProductBrandBo updateProductBrandBo = ProductBrandDtoConvert.INSTANCE.toBo(updateProductBrandReq);
+        // 2 业务
+        Integer update = productBrandService.updateProductById(brandId, updateProductBrandBo);
+        // 3 返回结果
+        if (update == null) {
+            MallProductServiceException.assertException(HttpStatus.INTERNAL_SERVER_ERROR, "更新商品品牌失败");
+        }
+        return new ResponseEntity<>(update, HttpStatus.OK);
     }
 }

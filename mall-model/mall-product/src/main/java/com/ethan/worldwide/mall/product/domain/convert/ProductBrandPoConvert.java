@@ -2,6 +2,7 @@ package com.ethan.worldwide.mall.product.domain.convert;
 
 import com.ethan.worldwide.mall.product.domain.bo.ContentProductBrandBo;
 import com.ethan.worldwide.mall.product.domain.bo.CreateProductBrandBo;
+import com.ethan.worldwide.mall.product.domain.bo.UpdateProductBrandBo;
 import com.ethan.worldwide.mall.product.infra.dao.po.brand.ProductBrandPo;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -27,4 +28,12 @@ public interface ProductBrandPoConvert {
     ProductBrandPo createBoToPo(CreateProductBrandBo createProductBrandBo);
 
     ContentProductBrandBo toContentBo(ProductBrandPo productBrandPo);
+
+    @Mappings({
+        @Mapping(target = "id", ignore = true),
+        @Mapping(target = "deleted", ignore = true),
+        @Mapping(target = "createTime", ignore = true),
+        @Mapping(target = "updateTime", expression = "java(new java.util.Date(System.currentTimeMillis()))")
+    })
+    ProductBrandPo updateBoToPo(UpdateProductBrandBo updateProductBrandBo);
 }

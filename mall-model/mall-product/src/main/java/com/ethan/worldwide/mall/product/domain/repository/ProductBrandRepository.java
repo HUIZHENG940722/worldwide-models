@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.ethan.worldwide.mall.product.domain.bo.ContentProductBrandBo;
 import com.ethan.worldwide.mall.product.domain.bo.CreateProductBrandBo;
 import com.ethan.worldwide.mall.product.domain.bo.QueryProductBrandBo;
+import com.ethan.worldwide.mall.product.domain.bo.UpdateProductBrandBo;
 import com.ethan.worldwide.mall.product.domain.convert.ProductBrandPoConvert;
 import com.ethan.worldwide.mall.product.infra.dao.ProductBrandMapper;
 import com.ethan.worldwide.mall.product.infra.dao.po.brand.ProductBrandPo;
@@ -41,7 +42,13 @@ public class ProductBrandRepository {
         return productBrandPo != null ? ProductBrandPoConvert.INSTANCE.toContentBo(productBrandPo) : null;
     }
 
-    public LambdaQueryWrapper<ProductBrandPo> getLambdaQueryWrapper() {
+    public Integer updateById(Integer id, UpdateProductBrandBo updateProductBrandBo) {
+        ProductBrandPo productBrandPo = ProductBrandPoConvert.INSTANCE.updateBoToPo(updateProductBrandBo);
+        productBrandPo.setId(id);
+        return productBrandMapper.updateById(productBrandPo);
+    }
+
+    private LambdaQueryWrapper<ProductBrandPo> getLambdaQueryWrapper() {
         return Wrappers.lambdaQuery(ProductBrandPo.class);
     }
 }
