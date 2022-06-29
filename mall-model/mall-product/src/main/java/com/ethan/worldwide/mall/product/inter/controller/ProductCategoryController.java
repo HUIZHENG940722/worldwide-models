@@ -1,6 +1,7 @@
 package com.ethan.worldwide.mall.product.inter.controller;
 
 import com.ethan.worldwide.mall.product.application.service.ProductCategoryService;
+import com.ethan.worldwide.mall.product.domain.bo.category.ContentProductCategoryBo;
 import com.ethan.worldwide.mall.product.domain.bo.category.CreateProductCategoryBo;
 import com.ethan.worldwide.mall.product.infra.exception.MallProductServiceException;
 import com.ethan.worldwide.mall.product.inter.assembler.ProductCategoryDtoConvert;
@@ -41,7 +42,15 @@ public class ProductCategoryController implements MallProductCategoryApi {
 
     @Override
     public ResponseEntity<ContentProductCategoryResp> getProductCategoryContent(Integer categoryId) {
-        return null;
+        // 1 数据转换
+        // 2 业务
+        ContentProductCategoryBo contentProductCategoryBo = productCategoryService.getProductCategoryContent(categoryId);
+        // 3 返回结果
+        if (contentProductCategoryBo == null) {
+            MallProductServiceException.assertException(HttpStatus.NOT_FOUND, "获取商品分类内容失败");
+        }
+        ContentProductCategoryResp contentProductCategoryResp = ProductCategoryDtoConvert.INSTANCE.toContentResp(contentProductCategoryBo);
+        return new ResponseEntity<>(contentProductCategoryResp, HttpStatus.OK);
     }
 
     @Override

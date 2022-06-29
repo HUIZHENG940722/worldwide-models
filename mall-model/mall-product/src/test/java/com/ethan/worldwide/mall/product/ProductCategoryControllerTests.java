@@ -40,4 +40,16 @@ public class ProductCategoryControllerTests extends MallProductApplicationTests 
         createProductCategoryReq.setPid(10);
         return createProductCategoryReq;
     }
+
+    @Test
+    public void getProductCategoryContentTestSuccess() throws Exception {
+        String contentAsString = post("/product/category", buildSuccessCreateProductCategoryReq()).andExpect(MockMvcResultMatchers.status().isCreated())
+            .andReturn().getResponse().getContentAsString();
+        get("/product/category/{category_id}".replace("{category_id}", contentAsString)).andExpect(MockMvcResultMatchers.status().isOk());
+    }
+
+    @Test
+    public void getProductCategoryContentTestFail() throws Exception {
+        get("/product/category/{category_id}".replace("{category_id}", "100")).andExpect(MockMvcResultMatchers.status().isNotFound());
+    }
 }

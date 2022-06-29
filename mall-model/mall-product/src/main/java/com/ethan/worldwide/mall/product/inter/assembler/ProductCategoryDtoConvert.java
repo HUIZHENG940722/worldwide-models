@@ -1,6 +1,8 @@
 package com.ethan.worldwide.mall.product.inter.assembler;
 
+import com.ethan.worldwide.mall.product.domain.bo.category.ContentProductCategoryBo;
 import com.ethan.worldwide.mall.product.domain.bo.category.CreateProductCategoryBo;
+import com.ethan.worldwide.openapi.interfaces.api.dto.ContentProductCategoryResp;
 import com.ethan.worldwide.openapi.interfaces.api.dto.CreateProductCategoryReq;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -21,4 +23,6 @@ public interface ProductCategoryDtoConvert {
         @Mapping(target = "status", expression = "java(com.ethan.worldwide.mall.product.infra.dao.enums.StatusEnum.NUMBER_1)")
     })
     CreateProductCategoryBo toBo(CreateProductCategoryReq createProductCategoryReq);
+
+    ContentProductCategoryResp toContentResp(ContentProductCategoryBo contentProductCategoryBo);
 }
