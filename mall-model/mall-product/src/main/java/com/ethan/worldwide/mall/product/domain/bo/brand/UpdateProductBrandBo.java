@@ -1,4 +1,4 @@
-package com.ethan.worldwide.mall.product.domain.bo;
+package com.ethan.worldwide.mall.product.domain.bo.brand;
 
 import com.baomidou.mybatisplus.annotation.EnumValue;
 import com.baomidou.mybatisplus.annotation.FieldStrategy;

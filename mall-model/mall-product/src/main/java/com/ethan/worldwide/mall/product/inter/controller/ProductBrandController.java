@@ -1,11 +1,11 @@
 package com.ethan.worldwide.mall.product.inter.controller;
 
 import com.ethan.worldwide.mall.product.application.service.ProductBrandService;
-import com.ethan.worldwide.mall.product.domain.bo.ContentProductBrandBo;
-import com.ethan.worldwide.mall.product.domain.bo.CreateProductBrandBo;
-import com.ethan.worldwide.mall.product.domain.bo.PageProductBrandBo;
-import com.ethan.worldwide.mall.product.domain.bo.PageQueryProductBrandBo;
-import com.ethan.worldwide.mall.product.domain.bo.UpdateProductBrandBo;
+import com.ethan.worldwide.mall.product.domain.bo.brand.ContentProductBrandBo;
+import com.ethan.worldwide.mall.product.domain.bo.brand.CreateProductBrandBo;
+import com.ethan.worldwide.mall.product.domain.bo.brand.PageProductBrandBo;
+import com.ethan.worldwide.mall.product.domain.bo.brand.PageQueryProductBrandBo;
+import com.ethan.worldwide.mall.product.domain.bo.brand.UpdateProductBrandBo;
 import com.ethan.worldwide.mall.product.infra.exception.MallProductServiceException;
 import com.ethan.worldwide.mall.product.inter.assembler.ProductBrandDtoConvert;
 import com.ethan.worldwide.openapi.interfaces.api.MallProductBrandApi;

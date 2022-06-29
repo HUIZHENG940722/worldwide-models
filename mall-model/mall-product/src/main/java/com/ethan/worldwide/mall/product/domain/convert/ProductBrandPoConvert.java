@@ -1,8 +1,8 @@
 package com.ethan.worldwide.mall.product.domain.convert;
 
-import com.ethan.worldwide.mall.product.domain.bo.ContentProductBrandBo;
-import com.ethan.worldwide.mall.product.domain.bo.CreateProductBrandBo;
-import com.ethan.worldwide.mall.product.domain.bo.UpdateProductBrandBo;
+import com.ethan.worldwide.mall.product.domain.bo.brand.ContentProductBrandBo;
+import com.ethan.worldwide.mall.product.domain.bo.brand.CreateProductBrandBo;
+import com.ethan.worldwide.mall.product.domain.bo.brand.UpdateProductBrandBo;
 import com.ethan.worldwide.mall.product.infra.dao.po.brand.ProductBrandPo;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
