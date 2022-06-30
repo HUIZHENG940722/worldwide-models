@@ -25,7 +25,7 @@ public interface ProductBrandPoConvert {
         @Mapping(target = "id", ignore = true),
         @Mapping(target = "deleted", expression = "java(com.ethan.worldwide.mall.product.infra.dao.enums.DeletedEnum.NUMBER_1)"),
         @Mapping(target = "createTime", expression = "java(new java.util.Date(System.currentTimeMillis()))"),
-        @Mapping(target = "updateTime", expression = "java(new java.util.Date(System.currentTimeMillis()))")
+        @Mapping(target = "updateTime", ignore = true)
     })
     ProductBrandPo createBoToPo(CreateProductBrandBo createProductBrandBo);
 
