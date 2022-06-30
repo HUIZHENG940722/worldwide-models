@@ -2,6 +2,8 @@ package com.ethan.worldwide.mall.product.application.service;
 
 import com.ethan.worldwide.mall.product.domain.bo.category.ContentProductCategoryBo;
 import com.ethan.worldwide.mall.product.domain.bo.category.CreateProductCategoryBo;
+import com.ethan.worldwide.mall.product.domain.bo.category.PageProductCategoryBo;
+import com.ethan.worldwide.mall.product.domain.bo.category.PageQueryProductCategoryBo;
 import com.ethan.worldwide.mall.product.domain.bo.category.QueryProductCategoryBo;
 import com.ethan.worldwide.mall.product.domain.bo.category.UpdateProductCategoryBo;
 import com.ethan.worldwide.mall.product.domain.service.ProductCategoryDomainService;
@@ -40,6 +42,13 @@ public class ProductCategoryService {
         // 1 校验
         // 2 业务
         return productCategoryDomainService.updateById(categoryId, updateProductCategoryBo);
+        // 3 返回结果
+    }
+
+    public PageProductCategoryBo pageProductCategoryContent(PageQueryProductCategoryBo pageQueryProductCategoryBo) {
+        // 1 校验
+        // 2 业务
+        return productCategoryDomainService.page(pageQueryProductCategoryBo);
         // 3 返回结果
     }
 }

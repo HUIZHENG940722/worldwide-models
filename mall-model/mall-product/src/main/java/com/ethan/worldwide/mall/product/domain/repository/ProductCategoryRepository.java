@@ -3,8 +3,11 @@ package com.ethan.worldwide.mall.product.domain.repository;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.ethan.worldwide.mall.product.domain.bo.category.ContentProductCategoryBo;
 import com.ethan.worldwide.mall.product.domain.bo.category.CreateProductCategoryBo;
+import com.ethan.worldwide.mall.product.domain.bo.category.PageProductCategoryBo;
+import com.ethan.worldwide.mall.product.domain.bo.category.PageQueryProductCategoryBo;
 import com.ethan.worldwide.mall.product.domain.bo.category.QueryProductCategoryBo;
 import com.ethan.worldwide.mall.product.domain.bo.category.UpdateProductCategoryBo;
 import com.ethan.worldwide.mall.product.domain.convert.ProductCategoryPoConvert;
@@ -48,6 +51,28 @@ public class ProductCategoryRepository {
         ProductCategoryPo productCategoryPo = ProductCategoryPoConvert.INSTANCE.updateBoToPo(updateProductCategoryBo);
         productCategoryPo.setId(id);
         return productCategoryMapper.updateById(productCategoryPo);
+    }
+
+    public PageProductCategoryBo page(PageQueryProductCategoryBo pageQueryProductCategoryBo) {
+        LambdaQueryWrapper<ProductCategoryPo> lambdaQueryWrapper = getLambdaQueryWrapper();
+        if (pageQueryProductCategoryBo.getId() != null) {
+            lambdaQueryWrapper.eq(ProductCategoryPo::getId, pageQueryProductCategoryBo.getId());
+        }
+        if (pageQueryProductCategoryBo.getPid() != null) {
+            lambdaQueryWrapper.eq(ProductCategoryPo::getPid, pageQueryProductCategoryBo.getPid());
+        }
+        if (StrUtil.isNotEmpty(pageQueryProductCategoryBo.getName()) && StrUtil.isNotBlank(pageQueryProductCategoryBo.getName())) {
+            lambdaQueryWrapper.like(ProductCategoryPo::getName, pageQueryProductCategoryBo.getName());
+        }
+        if (pageQueryProductCategoryBo.getStatus() != null) {
+            lambdaQueryWrapper.eq(ProductCategoryPo::getStatus, pageQueryProductCategoryBo.getStatus());
+        }
+        Page<ProductCategoryPo> objectPage = new Page<>(pageQueryProductCategoryBo.getPageNo(), pageQueryProductCategoryBo.getPageSize());
+        Page<ProductCategoryPo> productCategoryPoPage = productCategoryMapper.selectPage(objectPage, lambdaQueryWrapper);
+        PageProductCategoryBo pageProductCategoryBo = new PageProductCategoryBo();
+        pageProductCategoryBo.setTotal((int) productCategoryPoPage.getTotal());
+        pageProductCategoryBo.setData(ProductCategoryPoConvert.INSTANCE.toPageBo(productCategoryPoPage.getRecords()));
+        return pageProductCategoryBo;
     }
 
     private LambdaQueryWrapper<ProductCategoryPo> getLambdaQueryWrapper() {

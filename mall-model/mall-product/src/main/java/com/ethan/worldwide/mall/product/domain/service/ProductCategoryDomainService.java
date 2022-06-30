@@ -3,6 +3,8 @@ package com.ethan.worldwide.mall.product.domain.service;
 import cn.hutool.core.util.StrUtil;
 import com.ethan.worldwide.mall.product.domain.bo.category.ContentProductCategoryBo;
 import com.ethan.worldwide.mall.product.domain.bo.category.CreateProductCategoryBo;
+import com.ethan.worldwide.mall.product.domain.bo.category.PageProductCategoryBo;
+import com.ethan.worldwide.mall.product.domain.bo.category.PageQueryProductCategoryBo;
 import com.ethan.worldwide.mall.product.domain.bo.category.QueryProductCategoryBo;
 import com.ethan.worldwide.mall.product.domain.bo.category.UpdateProductCategoryBo;
 import com.ethan.worldwide.mall.product.domain.repository.ProductCategoryRepository;
@@ -90,6 +92,19 @@ public class ProductCategoryDomainService {
         }
         // 2 核心业务
         return productCategoryRepository.updateById(id, updateProductCategoryBo);
+        // 3 返回结果
+    }
+
+    /**
+     * 分页查询商品分类内容
+     *
+     * @param pageQueryProductCategoryBo
+     * @return
+     */
+    public PageProductCategoryBo page(PageQueryProductCategoryBo pageQueryProductCategoryBo) {
+        // 1 核心校验
+        // 2 核心业务
+        return productCategoryRepository.page(pageQueryProductCategoryBo);
         // 3 返回结果
     }
 

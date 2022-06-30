@@ -9,6 +9,8 @@ import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 import org.mapstruct.factory.Mappers;
 
+import java.util.List;
+
 /**
  * @Author zWX1058539
  * @Description 商品分类PO转换器
@@ -36,4 +38,6 @@ public interface ProductCategoryPoConvert {
         @Mapping(target = "updateTime", expression = "java(new java.util.Date(System.currentTimeMillis()))")
     })
     ProductCategoryPo updateBoToPo(UpdateProductCategoryBo updateProductCategoryBo);
+
+    List<ContentProductCategoryBo> toPageBo(List<ProductCategoryPo> records);
 }

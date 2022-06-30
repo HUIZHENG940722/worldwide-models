@@ -3,6 +3,8 @@ package com.ethan.worldwide.mall.product.inter.controller;
 import com.ethan.worldwide.mall.product.application.service.ProductCategoryService;
 import com.ethan.worldwide.mall.product.domain.bo.category.ContentProductCategoryBo;
 import com.ethan.worldwide.mall.product.domain.bo.category.CreateProductCategoryBo;
+import com.ethan.worldwide.mall.product.domain.bo.category.PageProductCategoryBo;
+import com.ethan.worldwide.mall.product.domain.bo.category.PageQueryProductCategoryBo;
 import com.ethan.worldwide.mall.product.domain.bo.category.UpdateProductCategoryBo;
 import com.ethan.worldwide.mall.product.infra.exception.MallProductServiceException;
 import com.ethan.worldwide.mall.product.inter.assembler.ProductCategoryDtoConvert;
@@ -56,7 +58,13 @@ public class ProductCategoryController implements MallProductCategoryApi {
 
     @Override
     public ResponseEntity<PageProductCategoryResp> pageProductCategoryContent(PageQueryProductCategoryReq pageQueryProductCategoryReq) {
-        return null;
+        // 1 数据转换
+        PageQueryProductCategoryBo pageQueryProductCategoryBo = ProductCategoryDtoConvert.INSTANCE.toBo(pageQueryProductCategoryReq);
+        // 2 业务
+        PageProductCategoryBo pageProductCategoryBo = productCategoryService.pageProductCategoryContent(pageQueryProductCategoryBo);
+        // 3 返回结果
+        PageProductCategoryResp pageProductCategoryResp = ProductCategoryDtoConvert.INSTANCE.toPageResp(pageProductCategoryBo);
+        return new ResponseEntity<>(pageProductCategoryResp, HttpStatus.OK);
     }
 
     @Override

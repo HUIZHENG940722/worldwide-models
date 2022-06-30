@@ -1,6 +1,7 @@
 package com.ethan.worldwide.mall.product;
 
 import com.ethan.worldwide.openapi.interfaces.api.dto.CreateProductCategoryReq;
+import com.ethan.worldwide.openapi.interfaces.api.dto.PageQueryProductCategoryReq;
 import com.ethan.worldwide.openapi.interfaces.api.dto.UpdateProductCategoryReq;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
@@ -86,5 +87,17 @@ public class ProductCategoryControllerTests extends MallProductApplicationTests 
         UpdateProductCategoryReq updateProductCategoryReq = new UpdateProductCategoryReq();
         updateProductCategoryReq.setName("服装");
         return updateProductCategoryReq;
+    }
+
+    @Test
+    public void pageProductCategoryContentTestSuccess() throws Exception {
+        get("/product/category/page", buildPageQueryProductCategoryReq()).andExpect(MockMvcResultMatchers.status().isOk());
+    }
+
+    private PageQueryProductCategoryReq buildPageQueryProductCategoryReq() {
+        PageQueryProductCategoryReq pageQueryProductCategoryReq = new PageQueryProductCategoryReq();
+        pageQueryProductCategoryReq.setPageNo(1);
+        pageQueryProductCategoryReq.setPageSize(10);
+        return pageQueryProductCategoryReq;
     }
 }
