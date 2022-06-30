@@ -1,8 +1,10 @@
 package com.ethan.worldwide.mall.product.domain.service;
 
+import cn.hutool.core.util.StrUtil;
 import com.ethan.worldwide.mall.product.domain.bo.category.ContentProductCategoryBo;
 import com.ethan.worldwide.mall.product.domain.bo.category.CreateProductCategoryBo;
 import com.ethan.worldwide.mall.product.domain.bo.category.QueryProductCategoryBo;
+import com.ethan.worldwide.mall.product.domain.bo.category.UpdateProductCategoryBo;
 import com.ethan.worldwide.mall.product.domain.repository.ProductCategoryRepository;
 import com.ethan.worldwide.mall.product.infra.exception.MallProductServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,10 +46,50 @@ public class ProductCategoryDomainService {
         // 3 返回结果
     }
 
+    /**
+     * 获取商品分类内容
+     *
+     * @param queryProductCategoryBo
+     * @return
+     */
     public ContentProductCategoryBo get(QueryProductCategoryBo queryProductCategoryBo) {
         // 1 核心校验
         // 2 核心业务
         return productCategoryRepository.get(queryProductCategoryBo);
+        // 3 返回结果
+    }
+
+    /**
+     * 更新商品分类BO
+     *
+     * @param id
+     * @param updateProductCategoryBo
+     * @return
+     */
+    public Integer updateById(Integer id, UpdateProductCategoryBo updateProductCategoryBo) {
+        // 1 核心校验
+        // 1.1 校验商品分类父编码是否存在
+        if (updateProductCategoryBo.getPid() != null) {
+            checkLegalityParent(updateProductCategoryBo.getPid());
+        }
+        // 1.2 校验商品分类是否存在
+        QueryProductCategoryBo queryById = new QueryProductCategoryBo();
+        queryById.setId(id);
+        ContentProductCategoryBo byId = productCategoryRepository.get(queryById);
+        if (byId == null) {
+            MallProductServiceException.assertException(HttpStatus.NOT_FOUND, "商品分类不存在");
+        }
+        // 1.3 校验商品分类名称是否已存在
+        if (StrUtil.isNotEmpty(updateProductCategoryBo.getName()) && StrUtil.isNotBlank(updateProductCategoryBo.getName().trim())) {
+            QueryProductCategoryBo queryByName = new QueryProductCategoryBo();
+            queryByName.setName(updateProductCategoryBo.getName());
+            ContentProductCategoryBo byName = productCategoryRepository.get(queryByName);
+            if (byName != null && !byName.getId().equals(byId.getId())) {
+                MallProductServiceException.assertException(HttpStatus.CONFLICT, "商品分类名称重复");
+            }
+        }
+        // 2 核心业务
+        return productCategoryRepository.updateById(id, updateProductCategoryBo);
         // 3 返回结果
     }
 

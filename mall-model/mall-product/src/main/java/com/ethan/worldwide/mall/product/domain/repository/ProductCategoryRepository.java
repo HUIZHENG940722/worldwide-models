@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.ethan.worldwide.mall.product.domain.bo.category.ContentProductCategoryBo;
 import com.ethan.worldwide.mall.product.domain.bo.category.CreateProductCategoryBo;
 import com.ethan.worldwide.mall.product.domain.bo.category.QueryProductCategoryBo;
+import com.ethan.worldwide.mall.product.domain.bo.category.UpdateProductCategoryBo;
 import com.ethan.worldwide.mall.product.domain.convert.ProductCategoryPoConvert;
 import com.ethan.worldwide.mall.product.infra.dao.ProductCategoryMapper;
 import com.ethan.worldwide.mall.product.infra.dao.po.category.ProductCategoryPo;
@@ -41,6 +42,12 @@ public class ProductCategoryRepository {
             lambdaQueryWrapper.eq(ProductCategoryPo::getName, queryProductCategoryBo.getName());
         }
         return ProductCategoryPoConvert.INSTANCE.toContentBo(productCategoryMapper.selectOne(lambdaQueryWrapper));
+    }
+
+    public Integer updateById(Integer id, UpdateProductCategoryBo updateProductCategoryBo) {
+        ProductCategoryPo productCategoryPo = ProductCategoryPoConvert.INSTANCE.updateBoToPo(updateProductCategoryBo);
+        productCategoryPo.setId(id);
+        return productCategoryMapper.updateById(productCategoryPo);
     }
 
     private LambdaQueryWrapper<ProductCategoryPo> getLambdaQueryWrapper() {

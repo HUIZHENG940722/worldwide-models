@@ -2,8 +2,10 @@ package com.ethan.worldwide.mall.product.inter.assembler;
 
 import com.ethan.worldwide.mall.product.domain.bo.category.ContentProductCategoryBo;
 import com.ethan.worldwide.mall.product.domain.bo.category.CreateProductCategoryBo;
+import com.ethan.worldwide.mall.product.domain.bo.category.UpdateProductCategoryBo;
 import com.ethan.worldwide.openapi.interfaces.api.dto.ContentProductCategoryResp;
 import com.ethan.worldwide.openapi.interfaces.api.dto.CreateProductCategoryReq;
+import com.ethan.worldwide.openapi.interfaces.api.dto.UpdateProductCategoryReq;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
@@ -25,4 +27,6 @@ public interface ProductCategoryDtoConvert {
     CreateProductCategoryBo toBo(CreateProductCategoryReq createProductCategoryReq);
 
     ContentProductCategoryResp toContentResp(ContentProductCategoryBo contentProductCategoryBo);
+
+    UpdateProductCategoryBo toBo(UpdateProductCategoryReq updateProductCategoryReq);
 }

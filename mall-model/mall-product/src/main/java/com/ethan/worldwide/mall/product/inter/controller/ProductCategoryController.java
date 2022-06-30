@@ -3,6 +3,7 @@ package com.ethan.worldwide.mall.product.inter.controller;
 import com.ethan.worldwide.mall.product.application.service.ProductCategoryService;
 import com.ethan.worldwide.mall.product.domain.bo.category.ContentProductCategoryBo;
 import com.ethan.worldwide.mall.product.domain.bo.category.CreateProductCategoryBo;
+import com.ethan.worldwide.mall.product.domain.bo.category.UpdateProductCategoryBo;
 import com.ethan.worldwide.mall.product.infra.exception.MallProductServiceException;
 import com.ethan.worldwide.mall.product.inter.assembler.ProductCategoryDtoConvert;
 import com.ethan.worldwide.openapi.interfaces.api.MallProductCategoryApi;
@@ -60,6 +61,14 @@ public class ProductCategoryController implements MallProductCategoryApi {
 
     @Override
     public ResponseEntity<Integer> updateProductCategory(Integer categoryId, UpdateProductCategoryReq updateProductCategoryReq) {
-        return null;
+        // 1 数据转换
+        UpdateProductCategoryBo updateProductCategoryBo = ProductCategoryDtoConvert.INSTANCE.toBo(updateProductCategoryReq);
+        // 2 业务
+        Integer update = productCategoryService.updateProductCategory(categoryId, updateProductCategoryBo);
+        // 3 返回结果
+        if (update == null) {
+            MallProductServiceException.assertException(HttpStatus.INTERNAL_SERVER_ERROR, "更新商品分类失败");
+        }
+        return new ResponseEntity<>(update, HttpStatus.OK);
     }
 }

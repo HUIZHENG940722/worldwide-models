@@ -3,6 +3,7 @@ package com.ethan.worldwide.mall.product.application.service;
 import com.ethan.worldwide.mall.product.domain.bo.category.ContentProductCategoryBo;
 import com.ethan.worldwide.mall.product.domain.bo.category.CreateProductCategoryBo;
 import com.ethan.worldwide.mall.product.domain.bo.category.QueryProductCategoryBo;
+import com.ethan.worldwide.mall.product.domain.bo.category.UpdateProductCategoryBo;
 import com.ethan.worldwide.mall.product.domain.service.ProductCategoryDomainService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,6 +33,13 @@ public class ProductCategoryService {
         QueryProductCategoryBo queryProductCategoryBo = new QueryProductCategoryBo();
         queryProductCategoryBo.setId(categoryId);
         return productCategoryDomainService.get(queryProductCategoryBo);
+        // 3 返回结果
+    }
+
+    public Integer updateProductCategory(Integer categoryId, UpdateProductCategoryBo updateProductCategoryBo) {
+        // 1 校验
+        // 2 业务
+        return productCategoryDomainService.updateById(categoryId, updateProductCategoryBo);
         // 3 返回结果
     }
 }
