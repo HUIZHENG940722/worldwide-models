@@ -1,6 +1,10 @@
-package com.ethan.worldwide.mall.product;
+package com.ethan.worldwide.account.admin;
 
 import cn.hutool.json.JSONUtil;
+import com.ethan.worldwide.common.config.AppConfig;
+import com.ethan.worldwide.account.admin.inter.controller.AdminUserController;
+import com.ethan.worldwide.openapi.interfaces.api.dto.LoginAdminReq;
+import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -11,11 +15,11 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-class MallProductApplicationTests {
+class AccountAdminApplicationTests {
 
     private static String accessToken;
 
-    /*@Autowired
+    @Autowired
     private AppConfig appConfig;
 
     @Autowired
@@ -27,7 +31,7 @@ class MallProductApplicationTests {
         loginAdminReq.setUsername(appConfig.getUsername());
         loginAdminReq.setPassword(appConfig.getPassword());
         accessToken = "Bearer " + adminUserController.login(loginAdminReq).getBody();
-    }*/
+    }
 
     @Autowired
     private MockMvc mockMvc;
@@ -57,4 +61,5 @@ class MallProductApplicationTests {
     protected ResultActions delete(String url) throws Exception {
         return mockMvc.perform(MockMvcRequestBuilders.delete(url).header("Authorization", accessToken));
     }
+
 }

@@ -6,8 +6,6 @@ import com.ethan.worldwide.openapi.interfaces.api.dto.StatusEnum;
 import com.ethan.worldwide.openapi.interfaces.api.dto.UpdateProductBrandReq;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 /**

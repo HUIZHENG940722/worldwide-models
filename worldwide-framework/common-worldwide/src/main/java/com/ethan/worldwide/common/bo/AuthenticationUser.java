@@ -1,4 +1,4 @@
-package com.ethan.worldwide.security;
+package com.ethan.worldwide.common.bo;
 
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;

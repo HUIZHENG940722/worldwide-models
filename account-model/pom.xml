@@ -6,24 +6,23 @@
         <artifactId>worldwide-models</artifactId>
         <groupId>com.ethan.worldwide</groupId>
         <version>1.0-SNAPSHOT</version>
-        <relativePath>../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <packaging>pom</packaging>
-    <artifactId>worldwide-framework</artifactId>
-    <description>全球生态部的公共基础服务</description>
+
+    <artifactId>account-model</artifactId>
+
     <modules>
-        <module>security-worldwide</module>
-        <module>openapi-worldwide</module>
-        <module>common-worldwide</module>
+        <module>account-admin</module>
     </modules>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
         <spring-boot.version>2.3.7.RELEASE</spring-boot.version>
+        <mybatis-plus.version>3.4.2</mybatis-plus.version>
+        <mapstruct.version>1.4.1.Final</mapstruct.version>
         <hutool-all.version>5.6.1</hutool-all.version>
-        <jjwt.version>0.9.0</jjwt.version>
     </properties>
 
     <dependencyManagement>
@@ -36,11 +35,26 @@
                 <scope>import</scope>
             </dependency>
             <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis-plus.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct</artifactId>
+                <version>${mapstruct.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct-processor</artifactId>
+                <version>${mapstruct.version}</version>
+            </dependency>
+
+            <dependency>
                 <groupId>cn.hutool</groupId>
                 <artifactId>hutool-all</artifactId>
                 <version>${hutool-all.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
-
 </project>

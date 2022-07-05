@@ -1,0 +1,27 @@
+worldwide:
+  app:
+    admin:
+      username: admin
+      password: 123456
+
+server:
+  port: 9401
+
+mybatis-plus:
+  mapper-locations: mapper/*.xml
+spring:
+  application:
+    name: account-admin
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/account?serverTimezone=UTC
+    username: root
+    password: ahui940722
+
+
+
+
+
+
+
+

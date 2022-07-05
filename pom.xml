@@ -11,6 +11,7 @@
     <modules>
         <module>mall-model</module>
         <module>worldwide-framework</module>
+        <module>account-model</module>
     </modules>
     <packaging>pom</packaging>
 

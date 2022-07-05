@@ -1,0 +1,32 @@
+worldwide:
+  app:
+    admin:
+      username: admin
+      password: 123456
+server:
+  port: 9401
+spring:
+  application:
+    name: account-admin
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:file:~/test
+    schema: classpath:sql/table/*.sql
+    data: classpath:sql/data/*.sql
+    username: san
+    password:
+  h2:
+    console:
+      settings:
+        web-allow-others: true
+        trace: true
+      path: /h2
+      enabled: true
+
+
+
+
+
+
+
+
