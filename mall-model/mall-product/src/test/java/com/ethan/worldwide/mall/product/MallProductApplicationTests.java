@@ -1,6 +1,10 @@
 package com.ethan.worldwide.mall.product;
 
 import cn.hutool.json.JSONUtil;
+import com.ethan.worldwide.common.config.AppConfig;
+import com.ethan.worldwide.mall.product.application.service.feign.IAdminUserService;
+import com.ethan.worldwide.openapi.interfaces.api.dto.LoginAdminReq;
+import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -15,19 +19,19 @@ class MallProductApplicationTests {
 
     private static String accessToken;
 
-    /*@Autowired
+    @Autowired
     private AppConfig appConfig;
 
     @Autowired
-    private AdminUserController adminUserController;
+    private IAdminUserService adminUserService;
 
     @BeforeEach
     void setUp() {
         LoginAdminReq loginAdminReq = new LoginAdminReq();
         loginAdminReq.setUsername(appConfig.getUsername());
         loginAdminReq.setPassword(appConfig.getPassword());
-        accessToken = "Bearer " + adminUserController.login(loginAdminReq).getBody();
-    }*/
+        accessToken = "Bearer " + adminUserService.login(loginAdminReq).getBody();
+    }
 
     @Autowired
     private MockMvc mockMvc;

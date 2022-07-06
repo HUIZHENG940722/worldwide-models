@@ -4,19 +4,17 @@ import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.ethan.worldwide.mall.product.domain.bo.category.ContentProductCategoryBo;
-import com.ethan.worldwide.mall.product.domain.bo.category.CreateProductCategoryBo;
 import com.ethan.worldwide.mall.product.domain.bo.category.PageProductCategoryBo;
-import com.ethan.worldwide.mall.product.domain.bo.category.PageQueryProductCategoryBo;
-import com.ethan.worldwide.mall.product.domain.bo.category.QueryProductCategoryBo;
 import com.ethan.worldwide.mall.product.domain.bo.category.UpdateProductCategoryBo;
 import com.ethan.worldwide.mall.product.domain.convert.ProductCategoryPoConvert;
-import com.ethan.worldwide.mall.product.infra.dao.ProductCategoryMapper;
 import com.ethan.worldwide.mall.product.infra.dao.po.category.ProductCategoryPo;
+import com.ethan.worldwide.mall.product.domain.bo.category.ContentProductCategoryBo;
+import com.ethan.worldwide.mall.product.domain.bo.category.CreateProductCategoryBo;
+import com.ethan.worldwide.mall.product.domain.bo.category.PageQueryProductCategoryBo;
+import com.ethan.worldwide.mall.product.domain.bo.category.QueryProductCategoryBo;
+import com.ethan.worldwide.mall.product.infra.dao.ProductCategoryMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
-import java.util.List;
 
 /**
  * @Author zWX1058539

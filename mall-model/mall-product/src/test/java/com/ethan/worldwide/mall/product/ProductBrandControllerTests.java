@@ -1,8 +1,8 @@
 package com.ethan.worldwide.mall.product;
 
+import com.ethan.worldwide.openapi.interfaces.api.dto.StatusEnum;
 import com.ethan.worldwide.openapi.interfaces.api.dto.CreateProductBrandReq;
 import com.ethan.worldwide.openapi.interfaces.api.dto.PageQueryProductBrandReq;
-import com.ethan.worldwide.openapi.interfaces.api.dto.StatusEnum;
 import com.ethan.worldwide.openapi.interfaces.api.dto.UpdateProductBrandReq;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

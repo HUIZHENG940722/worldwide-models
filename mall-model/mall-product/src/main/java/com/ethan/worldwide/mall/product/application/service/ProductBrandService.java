@@ -2,9 +2,9 @@ package com.ethan.worldwide.mall.product.application.service;
 
 import com.ethan.worldwide.mall.product.domain.bo.brand.ContentProductBrandBo;
 import com.ethan.worldwide.mall.product.domain.bo.brand.CreateProductBrandBo;
+import com.ethan.worldwide.mall.product.domain.bo.brand.QueryProductBrandBo;
 import com.ethan.worldwide.mall.product.domain.bo.brand.PageProductBrandBo;
 import com.ethan.worldwide.mall.product.domain.bo.brand.PageQueryProductBrandBo;
-import com.ethan.worldwide.mall.product.domain.bo.brand.QueryProductBrandBo;
 import com.ethan.worldwide.mall.product.domain.bo.brand.UpdateProductBrandBo;
 import com.ethan.worldwide.mall.product.domain.service.ProductBrandDomainService;
 import org.springframework.beans.factory.annotation.Autowired;

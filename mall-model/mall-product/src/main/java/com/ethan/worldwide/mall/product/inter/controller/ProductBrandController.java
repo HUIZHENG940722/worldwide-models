@@ -1,17 +1,17 @@
 package com.ethan.worldwide.mall.product.inter.controller;
 
-import com.ethan.worldwide.mall.product.application.service.ProductBrandService;
 import com.ethan.worldwide.mall.product.domain.bo.brand.ContentProductBrandBo;
 import com.ethan.worldwide.mall.product.domain.bo.brand.CreateProductBrandBo;
+import com.ethan.worldwide.mall.product.infra.exception.MallProductServiceException;
+import com.ethan.worldwide.openapi.interfaces.api.dto.ContentProductBrandResp;
+import com.ethan.worldwide.openapi.interfaces.api.dto.PageProductBrandResp;
+import com.ethan.worldwide.mall.product.application.service.ProductBrandService;
 import com.ethan.worldwide.mall.product.domain.bo.brand.PageProductBrandBo;
 import com.ethan.worldwide.mall.product.domain.bo.brand.PageQueryProductBrandBo;
 import com.ethan.worldwide.mall.product.domain.bo.brand.UpdateProductBrandBo;
-import com.ethan.worldwide.mall.product.infra.exception.MallProductServiceException;
 import com.ethan.worldwide.mall.product.inter.assembler.ProductBrandDtoConvert;
 import com.ethan.worldwide.openapi.interfaces.api.MallProductBrandApi;
-import com.ethan.worldwide.openapi.interfaces.api.dto.ContentProductBrandResp;
 import com.ethan.worldwide.openapi.interfaces.api.dto.CreateProductBrandReq;
-import com.ethan.worldwide.openapi.interfaces.api.dto.PageProductBrandResp;
 import com.ethan.worldwide.openapi.interfaces.api.dto.PageQueryProductBrandReq;
 import com.ethan.worldwide.openapi.interfaces.api.dto.UpdateProductBrandReq;
 import org.springframework.beans.factory.annotation.Autowired;

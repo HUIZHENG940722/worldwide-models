@@ -1,10 +1,7 @@
 package com.ethan.worldwide.mall.product.domain.bo.category;
 
-import com.ethan.worldwide.mall.product.infra.dao.enums.DeletedEnum;
 import com.ethan.worldwide.mall.product.infra.dao.enums.StatusEnum;
 import lombok.Data;
-
-import java.util.Date;
 
 /**
  * @Author zWX1058539

@@ -1,14 +1,14 @@
 package com.ethan.worldwide.mall.product.inter.assembler;
 
-import com.ethan.worldwide.mall.product.domain.bo.category.ContentProductCategoryBo;
-import com.ethan.worldwide.mall.product.domain.bo.category.CreateProductCategoryBo;
 import com.ethan.worldwide.mall.product.domain.bo.category.PageProductCategoryBo;
-import com.ethan.worldwide.mall.product.domain.bo.category.PageQueryProductCategoryBo;
 import com.ethan.worldwide.mall.product.domain.bo.category.UpdateProductCategoryBo;
 import com.ethan.worldwide.openapi.interfaces.api.dto.ContentProductCategoryResp;
 import com.ethan.worldwide.openapi.interfaces.api.dto.CreateProductCategoryReq;
 import com.ethan.worldwide.openapi.interfaces.api.dto.PageProductCategoryResp;
 import com.ethan.worldwide.openapi.interfaces.api.dto.PageQueryProductCategoryReq;
+import com.ethan.worldwide.mall.product.domain.bo.category.ContentProductCategoryBo;
+import com.ethan.worldwide.mall.product.domain.bo.category.CreateProductCategoryBo;
+import com.ethan.worldwide.mall.product.domain.bo.category.PageQueryProductCategoryBo;
 import com.ethan.worldwide.openapi.interfaces.api.dto.UpdateProductCategoryReq;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

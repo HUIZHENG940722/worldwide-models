@@ -3,7 +3,6 @@ package com.ethan.worldwide.security.core.filter;
 import com.ethan.worldwide.security.core.service.IAuthenticationService;
 import com.ethan.worldwide.security.core.util.JwtTokenUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -26,7 +25,6 @@ import java.io.IOException;
 public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
 
     @Autowired
-    @Qualifier(value = "adminUserService")
     private IAuthenticationService IAuthenticationService;
 
     @Override

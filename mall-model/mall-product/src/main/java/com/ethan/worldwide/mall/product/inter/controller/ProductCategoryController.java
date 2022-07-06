@@ -1,10 +1,7 @@
 package com.ethan.worldwide.mall.product.inter.controller;
 
 import com.ethan.worldwide.mall.product.application.service.ProductCategoryService;
-import com.ethan.worldwide.mall.product.domain.bo.category.ContentProductCategoryBo;
-import com.ethan.worldwide.mall.product.domain.bo.category.CreateProductCategoryBo;
 import com.ethan.worldwide.mall.product.domain.bo.category.PageProductCategoryBo;
-import com.ethan.worldwide.mall.product.domain.bo.category.PageQueryProductCategoryBo;
 import com.ethan.worldwide.mall.product.domain.bo.category.UpdateProductCategoryBo;
 import com.ethan.worldwide.mall.product.infra.exception.MallProductServiceException;
 import com.ethan.worldwide.mall.product.inter.assembler.ProductCategoryDtoConvert;
@@ -13,6 +10,9 @@ import com.ethan.worldwide.openapi.interfaces.api.dto.ContentProductCategoryResp
 import com.ethan.worldwide.openapi.interfaces.api.dto.CreateProductCategoryReq;
 import com.ethan.worldwide.openapi.interfaces.api.dto.PageProductCategoryResp;
 import com.ethan.worldwide.openapi.interfaces.api.dto.PageQueryProductCategoryReq;
+import com.ethan.worldwide.mall.product.domain.bo.category.ContentProductCategoryBo;
+import com.ethan.worldwide.mall.product.domain.bo.category.CreateProductCategoryBo;
+import com.ethan.worldwide.mall.product.domain.bo.category.PageQueryProductCategoryBo;
 import com.ethan.worldwide.openapi.interfaces.api.dto.UpdateProductCategoryReq;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

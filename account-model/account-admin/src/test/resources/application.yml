@@ -5,12 +5,20 @@ worldwide:
       password: 123456
 server:
   port: 9401
+
+eureka:
+  client:
+    register-with-eureka: false
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+    fetch-registry: true
+
 spring:
   application:
     name: account-admin
   datasource:
     driver-class-name: org.h2.Driver
-    url: jdbc:h2:file:~/test
+    url: jdbc:h2:file:~/test1
     schema: classpath:sql/table/*.sql
     data: classpath:sql/data/*.sql
     username: san

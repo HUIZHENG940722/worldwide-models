@@ -1,8 +1,8 @@
 package com.ethan.worldwide.account.admin;
 
 import cn.hutool.json.JSONUtil;
-import com.ethan.worldwide.common.config.AppConfig;
 import com.ethan.worldwide.account.admin.inter.controller.AdminUserController;
+import com.ethan.worldwide.common.config.AppConfig;
 import com.ethan.worldwide.openapi.interfaces.api.dto.LoginAdminReq;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;

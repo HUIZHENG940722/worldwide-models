@@ -1,15 +1,8 @@
 package com.ethan.worldwide.mall.product.domain.bo.brand;
 
 import com.baomidou.mybatisplus.annotation.EnumValue;
-import com.baomidou.mybatisplus.annotation.FieldStrategy;
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.ethan.worldwide.mall.product.infra.dao.enums.DeletedEnum;
 import com.ethan.worldwide.mall.product.infra.dao.enums.StatusEnum;
 import lombok.Data;
-
-import java.util.Date;
 
 /**
  * @Author zWX1058539

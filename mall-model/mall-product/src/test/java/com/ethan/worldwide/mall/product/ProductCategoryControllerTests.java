@@ -91,7 +91,7 @@ public class ProductCategoryControllerTests extends MallProductApplicationTests 
 
     @Test
     public void pageProductCategoryContentTestSuccess() throws Exception {
-        get("/product/category/page", buildPageQueryProductCategoryReq()).andExpect(MockMvcResultMatchers.status().isOk());
+        get("/product/category/page", buildPageQueryProductCategoryReq() ).andExpect(MockMvcResultMatchers.status().isOk());
     }
 
     private PageQueryProductCategoryReq buildPageQueryProductCategoryReq() {

@@ -1,9 +1,9 @@
 package com.ethan.worldwide.mall.product.domain.convert;
 
-import com.ethan.worldwide.mall.product.domain.bo.category.ContentProductCategoryBo;
-import com.ethan.worldwide.mall.product.domain.bo.category.CreateProductCategoryBo;
 import com.ethan.worldwide.mall.product.domain.bo.category.UpdateProductCategoryBo;
 import com.ethan.worldwide.mall.product.infra.dao.po.category.ProductCategoryPo;
+import com.ethan.worldwide.mall.product.domain.bo.category.ContentProductCategoryBo;
+import com.ethan.worldwide.mall.product.domain.bo.category.CreateProductCategoryBo;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
