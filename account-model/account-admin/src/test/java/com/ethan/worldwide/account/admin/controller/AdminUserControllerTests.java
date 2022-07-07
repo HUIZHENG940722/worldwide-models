@@ -1,5 +1,6 @@
-package com.ethan.worldwide.account.admin;
+package com.ethan.worldwide.account.admin.controller;
 
+import com.ethan.worldwide.account.admin.AccountAdminApplicationTests;
 import com.ethan.worldwide.openapi.interfaces.api.dto.AddAdminReq;
 import com.ethan.worldwide.openapi.interfaces.api.dto.LoginAdminReq;
 import org.junit.jupiter.api.Test;

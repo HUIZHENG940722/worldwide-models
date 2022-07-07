@@ -1,5 +1,6 @@
-package com.ethan.worldwide.mall.product;
+package com.ethan.worldwide.mall.product.controller;
 
+import com.ethan.worldwide.mall.product.MallProductApplicationTests;
 import com.ethan.worldwide.openapi.interfaces.api.dto.CreateProductCategoryReq;
 import com.ethan.worldwide.openapi.interfaces.api.dto.PageQueryProductCategoryReq;
 import com.ethan.worldwide.openapi.interfaces.api.dto.UpdateProductCategoryReq;

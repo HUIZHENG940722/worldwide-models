@@ -15,7 +15,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-class AccountAdminApplicationTests {
+public class AccountAdminApplicationTests {
 
     private static String accessToken;
 

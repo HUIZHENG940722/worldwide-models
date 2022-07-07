@@ -1,5 +1,6 @@
-package com.ethan.worldwide.mall.product;
+package com.ethan.worldwide.mall.product.controller;
 
+import com.ethan.worldwide.mall.product.MallProductApplicationTests;
 import com.ethan.worldwide.openapi.interfaces.api.dto.StatusEnum;
 import com.ethan.worldwide.openapi.interfaces.api.dto.CreateProductBrandReq;
 import com.ethan.worldwide.openapi.interfaces.api.dto.PageQueryProductBrandReq;
