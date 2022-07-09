@@ -11,8 +11,8 @@ eureka:
   client:
     service-url:
       defaultZone: http://127.0.0.1:8761/eureka/
-    healthcheck:
-      enabled: true
+#    healthcheck:
+#      enabled: true
     registry-fetch-interval-seconds: 5
 
 mybatis-plus:
@@ -20,16 +20,16 @@ mybatis-plus:
 spring:
   application:
     name: account-admin
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://100.85.113.163:3306/one_mall?serverTimezone=Asia/Shanghai
-    username: root
-    password: HW@Imc&369!
 #  datasource:
 #    driver-class-name: com.mysql.cj.jdbc.Driver
-#    url: jdbc:mysql://localhost:3306/account?serverTimezone=UTC
+#    url: jdbc:mysql://100.85.113.163:3306/one_mall?serverTimezone=Asia/Shanghai
 #    username: root
-#    password: ahui940722
+#    password: HW@Imc&369!
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/account?serverTimezone=UTC
+    username: root
+    password: ahui940722
 
 
 

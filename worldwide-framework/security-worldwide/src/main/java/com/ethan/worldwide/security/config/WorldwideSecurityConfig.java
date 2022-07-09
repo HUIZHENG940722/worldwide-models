@@ -36,11 +36,9 @@ public class WorldwideSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        // 白名单
-        http.authorizeRequests().antMatchers("/admin_user/login").permitAll();
-
         http
             .authorizeRequests().antMatchers(HttpMethod.OPTIONS).permitAll()
+            .antMatchers("/admin_user/login", "/test", "/loadUserByUsername").permitAll()
             .anyRequest().authenticated()
             .and()
             .formLogin()

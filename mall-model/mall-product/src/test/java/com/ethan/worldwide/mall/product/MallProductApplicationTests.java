@@ -1,52 +1,31 @@
 package com.ethan.worldwide.mall.product;
 
 import cn.hutool.json.JSONUtil;
-import com.ethan.worldwide.common.config.AppConfig;
-import com.ethan.worldwide.mall.product.application.service.feign.IAdminUserService;
-import com.ethan.worldwide.openapi.interfaces.api.dto.LoginAdminReq;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.cloud.client.ServiceInstance;
-import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
-import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
-import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import java.net.URI;
-
-@SpringBootTest
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
 @AutoConfigureMockMvc
-@EnableEurekaClient
-@EnableFeignClients
 public class MallProductApplicationTests {
 
     private static String accessToken;
 
     @Autowired
-    private AppConfig appConfig;
+    private MockMvc mockMvc;
 
-    @Autowired
-    private LoadBalancerClient loadBalancerClient;
 
     @BeforeEach
     void setUp() throws Exception {
-        ServiceInstance choose = loadBalancerClient.choose("ACCOUNT-ADMIN");
-        URI uri = choose.getUri();
-        String loginUrl = uri + "/admin_user/login";
-        LoginAdminReq loginAdminReq = new LoginAdminReq();
-        loginAdminReq.setUsername(appConfig.getUsername());
-        loginAdminReq.setPassword(appConfig.getPassword());
-        String contentAsString = mockMvc.perform(MockMvcRequestBuilders.post(loginUrl, loginAdminReq)).andReturn().getResponse().getContentAsString();
-        accessToken = "Bearer " + contentAsString;
+        accessToken = "Bearer " + "eyJhbGciOiJIUzUxMiJ9" +
+            ".eyJzdWIiOiJhZG1pbiIsImNyZWF0ZWQiOjQyNTA5NjE0NDczNTQ4LCJleHAiOjQyNTEwMjIwMDkwfQ" +
+            ".r9OtuL6M4QZOSoNhEDwnZg-yU0GZvaAWXFdsP0ARn_QKuQnnARsdSs6OnRdATW4vEMF-KTAFty6f_Q8QFCK24w";
     }
-
-    @Autowired
-    private MockMvc mockMvc;
 
     protected ResultActions post(String url, Object body) throws Exception {
         return mockMvc.perform(MockMvcRequestBuilders.post(url).contentType(MediaType.APPLICATION_JSON_VALUE)

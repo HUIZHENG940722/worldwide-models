@@ -1,5 +1,6 @@
 package com.ethan.worldwide.mall.product.application.service;
 
+import com.ethan.worldwide.common.bo.AuthenticationUser;
 import com.ethan.worldwide.mall.product.application.service.feign.IAdminUserService;
 import com.ethan.worldwide.security.core.service.IAuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,7 @@ public class AuthenticationService implements IAuthenticationService {
     private IAdminUserService adminUserService;
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public AuthenticationUser loadUserByUsername(String username) throws UsernameNotFoundException {
         return adminUserService.loadUserByUsername(username);
     }
 }

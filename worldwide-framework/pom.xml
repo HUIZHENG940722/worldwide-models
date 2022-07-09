@@ -16,6 +16,7 @@
         <module>security-worldwide</module>
         <module>openapi-worldwide</module>
         <module>common-worldwide</module>
+        <module>eureka-worldwide</module>
     </modules>
 
     <properties>
