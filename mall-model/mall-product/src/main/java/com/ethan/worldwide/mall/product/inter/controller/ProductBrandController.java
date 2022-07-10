@@ -17,7 +17,6 @@ import com.ethan.worldwide.openapi.interfaces.api.dto.UpdateProductBrandReq;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -32,7 +31,6 @@ public class ProductBrandController implements MallProductBrandApi {
     private ProductBrandService productBrandService;
 
     @Override
-    @Secured("ROLE_ADMIN")
     public ResponseEntity<Integer> createProductBrand(CreateProductBrandReq createProductBrandReq) {
         // 1 数据转换
         CreateProductBrandBo createProductBrandBo = ProductBrandDtoConvert.INSTANCE.toBo(createProductBrandReq);
