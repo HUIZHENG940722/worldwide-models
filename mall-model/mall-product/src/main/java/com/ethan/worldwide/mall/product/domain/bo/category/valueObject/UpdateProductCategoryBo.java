@@ -1,15 +1,15 @@
-package com.ethan.worldwide.mall.product.domain.bo.category;
+package com.ethan.worldwide.mall.product.domain.bo.category.valueObject;
 
 import com.ethan.worldwide.mall.product.infra.dao.enums.StatusEnum;
 import lombok.Data;
 
 /**
  * @Author zWX1058539
- * @Description 创建商品分类BO
- * @Date 2022/6/29
+ * @Description 更新商品分类BO
+ * @Date 2022/6/30
  */
 @Data
-public class CreateProductCategoryBo {
+public class UpdateProductCategoryBo {
 
     /**
      * 商品分类父编码

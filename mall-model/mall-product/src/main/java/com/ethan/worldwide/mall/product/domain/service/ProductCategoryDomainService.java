@@ -2,11 +2,10 @@ package com.ethan.worldwide.mall.product.domain.service;
 
 import cn.hutool.core.util.StrUtil;
 import com.ethan.worldwide.mall.product.domain.bo.category.PageProductCategoryBo;
-import com.ethan.worldwide.mall.product.domain.bo.category.UpdateProductCategoryBo;
+import com.ethan.worldwide.mall.product.domain.bo.category.ProductCategoryBo;
+import com.ethan.worldwide.mall.product.domain.bo.category.valueObject.UpdateProductCategoryBo;
 import com.ethan.worldwide.mall.product.domain.repository.ProductCategoryRepository;
 import com.ethan.worldwide.mall.product.infra.exception.MallProductServiceException;
-import com.ethan.worldwide.mall.product.domain.bo.category.ContentProductCategoryBo;
-import com.ethan.worldwide.mall.product.domain.bo.category.CreateProductCategoryBo;
 import com.ethan.worldwide.mall.product.domain.bo.category.PageQueryProductCategoryBo;
 import com.ethan.worldwide.mall.product.domain.bo.category.QueryProductCategoryBo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,23 +27,18 @@ public class ProductCategoryDomainService {
     /**
      * 创建商品分类
      *
-     * @param createProductCategoryBo
+     * @param productCategoryBo
      * @return
      */
     @Transactional
-    public Integer create(CreateProductCategoryBo createProductCategoryBo) {
+    public Integer create(ProductCategoryBo productCategoryBo) {
         // 1 核心校验
         // 1.1 校验商品分类父编码是否存在
-        checkLegalityParent(createProductCategoryBo.getPid());
+        checkPid(productCategoryBo.getPid());
         // 1.2 校验商品分类名称是否重复
-        QueryProductCategoryBo queryProductCategoryBo = new QueryProductCategoryBo();
-        queryProductCategoryBo.setName(createProductCategoryBo.getName());
-        ContentProductCategoryBo contentProductCategoryBo = productCategoryRepository.get(queryProductCategoryBo);
-        if (contentProductCategoryBo != null) {
-            MallProductServiceException.assertException(HttpStatus.CONFLICT, "商品分类名称重复");
-        }
+        checkName(null, productCategoryBo.getName());
         // 2 核心业务
-        return productCategoryRepository.add(createProductCategoryBo);
+        return productCategoryRepository.add(productCategoryBo);
         // 3 返回结果
     }
 
@@ -54,7 +48,7 @@ public class ProductCategoryDomainService {
      * @param queryProductCategoryBo
      * @return
      */
-    public ContentProductCategoryBo get(QueryProductCategoryBo queryProductCategoryBo) {
+    public ProductCategoryBo get(QueryProductCategoryBo queryProductCategoryBo) {
         // 1 核心校验
         // 2 核心业务
         return productCategoryRepository.get(queryProductCategoryBo);
@@ -64,34 +58,22 @@ public class ProductCategoryDomainService {
     /**
      * 更新商品分类BO
      *
-     * @param id
+     * @param productCategoryBo
      * @param updateProductCategoryBo
      * @return
      */
-    public Integer updateById(Integer id, UpdateProductCategoryBo updateProductCategoryBo) {
+    public Integer updateById(ProductCategoryBo productCategoryBo, UpdateProductCategoryBo updateProductCategoryBo) {
         // 1 核心校验
         // 1.1 校验商品分类父编码是否存在
         if (updateProductCategoryBo.getPid() != null) {
-            checkLegalityParent(updateProductCategoryBo.getPid());
+            checkPid(updateProductCategoryBo.getPid());
         }
-        // 1.2 校验商品分类是否存在
-        QueryProductCategoryBo queryById = new QueryProductCategoryBo();
-        queryById.setId(id);
-        ContentProductCategoryBo byId = productCategoryRepository.get(queryById);
-        if (byId == null) {
-            MallProductServiceException.assertException(HttpStatus.NOT_FOUND, "商品分类不存在");
-        }
-        // 1.3 校验商品分类名称是否已存在
+        // 1.2 校验商品分类名称是否已存在
         if (StrUtil.isNotEmpty(updateProductCategoryBo.getName()) && StrUtil.isNotBlank(updateProductCategoryBo.getName().trim())) {
-            QueryProductCategoryBo queryByName = new QueryProductCategoryBo();
-            queryByName.setName(updateProductCategoryBo.getName());
-            ContentProductCategoryBo byName = productCategoryRepository.get(queryByName);
-            if (byName != null && !byName.getId().equals(byId.getId())) {
-                MallProductServiceException.assertException(HttpStatus.CONFLICT, "商品分类名称重复");
-            }
+            checkName(productCategoryBo, updateProductCategoryBo.getName());
         }
         // 2 核心业务
-        return productCategoryRepository.updateById(id, updateProductCategoryBo);
+        return productCategoryRepository.updateById(productCategoryBo.getId(), updateProductCategoryBo);
         // 3 返回结果
     }
 
@@ -108,13 +90,28 @@ public class ProductCategoryDomainService {
         // 3 返回结果
     }
 
-    private void checkLegalityParent(Integer pid) {
+    private void checkPid(Integer pid) {
         if (!pid.equals(0)) {
             QueryProductCategoryBo queryProductCategoryBo = new QueryProductCategoryBo();
             queryProductCategoryBo.setId(pid);
-            ContentProductCategoryBo contentProductCategoryBo = productCategoryRepository.get(queryProductCategoryBo);
+            ProductCategoryBo contentProductCategoryBo = productCategoryRepository.get(queryProductCategoryBo);
             if (contentProductCategoryBo == null) {
                 MallProductServiceException.assertException(HttpStatus.NOT_FOUND, "商品分类父编码非法");
+            }
+        }
+    }
+
+    private void checkName(ProductCategoryBo productCategoryBo, String name) {
+        QueryProductCategoryBo queryByName = new QueryProductCategoryBo();
+        queryByName.setName(name);
+        ProductCategoryBo byName = productCategoryRepository.get(queryByName);
+        if (productCategoryBo != null) {
+            if (byName != null && !byName.getId().equals(productCategoryBo.getId())) {
+                MallProductServiceException.assertException(HttpStatus.CONFLICT, "商品分类名称重复");
+            }
+        } else {
+            if (byName != null) {
+                MallProductServiceException.assertException(HttpStatus.CONFLICT, "商品分类名称重复");
             }
         }
     }

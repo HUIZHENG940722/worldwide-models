@@ -1,19 +1,14 @@
 package com.ethan.worldwide.mall.product.inter.controller;
 
-import com.ethan.worldwide.mall.product.domain.bo.brand.ContentProductBrandBo;
-import com.ethan.worldwide.mall.product.domain.bo.brand.CreateProductBrandBo;
+import com.ethan.worldwide.mall.product.domain.bo.brand.ProductBrandBo;
 import com.ethan.worldwide.mall.product.infra.exception.MallProductServiceException;
-import com.ethan.worldwide.openapi.interfaces.api.dto.ContentProductBrandResp;
-import com.ethan.worldwide.openapi.interfaces.api.dto.PageProductBrandResp;
 import com.ethan.worldwide.mall.product.application.service.ProductBrandService;
 import com.ethan.worldwide.mall.product.domain.bo.brand.PageProductBrandBo;
 import com.ethan.worldwide.mall.product.domain.bo.brand.PageQueryProductBrandBo;
-import com.ethan.worldwide.mall.product.domain.bo.brand.UpdateProductBrandBo;
+import com.ethan.worldwide.mall.product.domain.bo.brand.valueObject.UpdateProductBrandBo;
 import com.ethan.worldwide.mall.product.inter.assembler.ProductBrandDtoConvert;
 import com.ethan.worldwide.openapi.interfaces.api.MallProductBrandApi;
-import com.ethan.worldwide.openapi.interfaces.api.dto.CreateProductBrandReq;
-import com.ethan.worldwide.openapi.interfaces.api.dto.PageQueryProductBrandReq;
-import com.ethan.worldwide.openapi.interfaces.api.dto.UpdateProductBrandReq;
+import com.ethan.worldwide.openapi.interfaces.api.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,9 +28,9 @@ public class ProductBrandController implements MallProductBrandApi {
     @Override
     public ResponseEntity<Integer> createProductBrand(CreateProductBrandReq createProductBrandReq) {
         // 1 数据转换
-        CreateProductBrandBo createProductBrandBo = ProductBrandDtoConvert.INSTANCE.toBo(createProductBrandReq);
+        ProductBrandBo productBrandBo = ProductBrandDtoConvert.INSTANCE.toBo(createProductBrandReq);
         // 2 业务
-        Integer productBrandId = productBrandService.createProductBrand(createProductBrandBo);
+        Integer productBrandId = productBrandService.createProductBrand(productBrandBo);
         if (productBrandId == null) {
             MallProductServiceException.assertException(HttpStatus.INTERNAL_SERVER_ERROR, "创建商品品牌失败");
         }
@@ -44,15 +39,15 @@ public class ProductBrandController implements MallProductBrandApi {
     }
 
     @Override
-    public ResponseEntity<ContentProductBrandResp> getProductBrandContent(Integer brandId) {
+    public ResponseEntity<ProductBrandResp> getProductBrandContent(Integer brandId) {
         // 1 数据转换
         // 2 业务
-        ContentProductBrandBo contentProductBrandBo = productBrandService.getProductBrandContent(brandId);
+        ProductBrandBo productBrandBo = productBrandService.getProductBrand(brandId);
         // 3 返回结果
-        if (contentProductBrandBo == null) {
+        if (productBrandBo == null) {
             MallProductServiceException.assertException(HttpStatus.NOT_FOUND, "获取商品品牌失败");
         }
-        ContentProductBrandResp contentProductBrandResp = ProductBrandDtoConvert.INSTANCE.toContentResp(contentProductBrandBo);
+        ProductBrandResp contentProductBrandResp = ProductBrandDtoConvert.INSTANCE.toResp(productBrandBo);
         return new ResponseEntity<>(contentProductBrandResp, HttpStatus.OK);
     }
 

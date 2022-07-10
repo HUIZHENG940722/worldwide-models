@@ -6,11 +6,12 @@ import java.util.Date;
 
 /**
  * @Author zhenghui
- * @Description 用户角色内容BO
- * @Date 2022/6/30
+ * @Description 后台管理员角色BO
+ * @Date 2022/7/10
  */
 @Data
-public class ContentAdminRoleBo {
+public class AdminRoleBo {
+
     /**
      * 角色编码
      */

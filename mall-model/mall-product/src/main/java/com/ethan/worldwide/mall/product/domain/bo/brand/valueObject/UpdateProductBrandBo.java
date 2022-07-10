@@ -1,17 +1,16 @@
-package com.ethan.worldwide.mall.product.domain.bo.brand;
+package com.ethan.worldwide.mall.product.domain.bo.brand.valueObject;
 
 import com.baomidou.mybatisplus.annotation.EnumValue;
 import com.ethan.worldwide.mall.product.infra.dao.enums.StatusEnum;
 import lombok.Data;
 
 /**
- * @author zhenghui
- * @Description 创建商品品牌BO
- * @Date 2022/6/22
+ * @Author zWX1058539
+ * @Description 更新商品品牌BO
+ * @Date 2022/6/27
  */
 @Data
-public class CreateProductBrandBo {
-
+public class UpdateProductBrandBo {
 
     /**
      * 品牌名称

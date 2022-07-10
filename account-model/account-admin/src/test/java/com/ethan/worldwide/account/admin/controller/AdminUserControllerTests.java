@@ -15,7 +15,7 @@ public class AdminUserControllerTests extends AccountAdminApplicationTests {
 
     @Test
     public void loginSuccessTest() throws Exception {
-        post("/admin_user/login", buildLoginRequestReqSuccess()).andExpect(MockMvcResultMatchers.status().isOk());
+        post("/account/admin/login", buildLoginRequestReqSuccess()).andExpect(MockMvcResultMatchers.status().isOk());
     }
 
     private LoginAdminReq buildLoginRequestReqSuccess() {
@@ -27,7 +27,7 @@ public class AdminUserControllerTests extends AccountAdminApplicationTests {
 
     @Test
     public void loginFailTest() throws Exception {
-        post("/admin_user/login", buildLoginRequestReqFail()).andExpect(MockMvcResultMatchers.status().isConflict());
+        post("/account/admin/login", buildLoginRequestReqFail()).andExpect(MockMvcResultMatchers.status().isConflict());
     }
 
     private LoginAdminReq buildLoginRequestReqFail() {
@@ -39,7 +39,7 @@ public class AdminUserControllerTests extends AccountAdminApplicationTests {
 
     @Test
     public void sysAdminAddAdminUserSuccessTest() throws Exception {
-        post("/admin_user/1", buildAddAdminReq()).andExpect(MockMvcResultMatchers.status().isCreated());
+        post("/account/admin/1", buildAddAdminReq()).andExpect(MockMvcResultMatchers.status().isCreated());
     }
 
     private AddAdminReq buildAddAdminReq() {

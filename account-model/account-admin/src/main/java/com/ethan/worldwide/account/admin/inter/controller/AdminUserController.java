@@ -2,7 +2,7 @@ package com.ethan.worldwide.account.admin.inter.controller;
 
 import cn.hutool.core.util.StrUtil;
 import com.ethan.worldwide.account.admin.application.service.AdminUserService;
-import com.ethan.worldwide.account.admin.domain.bo.user.CreateAdminUserBo;
+import com.ethan.worldwide.account.admin.domain.bo.user.AdminUserBo;
 import com.ethan.worldwide.account.admin.domain.bo.user.LoginAdminUserBo;
 import com.ethan.worldwide.account.admin.infra.exception.AccountAdminServiceException;
 import com.ethan.worldwide.account.admin.inter.assembler.AdminUserDtoConvert;
@@ -14,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -45,9 +44,9 @@ public class AdminUserController implements AccountAdminApi {
     @Override
     public ResponseEntity<Integer> sysAdminAddAdminUser(Integer sysAdminUserId, AddAdminReq addAdminReq) {
         // 1 数据转换
-        CreateAdminUserBo createAdminUserBo = AdminUserDtoConvert.INSTANCE.toBo(addAdminReq);
+        AdminUserBo adminUserBo = AdminUserDtoConvert.INSTANCE.toBo(addAdminReq);
         // 2 业务
-        Integer adminUserId = adminUserService.sysAdminAddAdminUser(sysAdminUserId, createAdminUserBo);
+        Integer adminUserId = adminUserService.sysAdminAddAdminUser(sysAdminUserId, adminUserBo);
         // 3 返回结果
         if (adminUserId == null) {
             AccountAdminServiceException.assertException(HttpStatus.INTERNAL_SERVER_ERROR, "创建后台用户失败");

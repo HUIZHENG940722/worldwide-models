@@ -1,5 +1,6 @@
-package com.ethan.worldwide.mall.product.domain.bo.category;
+package com.ethan.worldwide.mall.product.domain.bo.brand;
 
+import com.baomidou.mybatisplus.annotation.EnumValue;
 import com.ethan.worldwide.mall.product.infra.dao.enums.DeletedEnum;
 import com.ethan.worldwide.mall.product.infra.dao.enums.StatusEnum;
 import lombok.Data;
@@ -7,51 +8,43 @@ import lombok.Data;
 import java.util.Date;
 
 /**
- * @Author zWX1058539
- * @Description 商品分类内容BO
- * @Date 2022/6/29
+ * @Author zhenghui
+ * @Description 商品品牌BO
+ * @Date 2022/7/10
  */
 @Data
-public class ContentProductCategoryBo {
+public class ProductBrandBo {
 
     /**
-     * 商品分类编码
+     * 品牌编号（主键）
      */
     private Integer id;
 
     /**
-     * 商品分类父编码
-     */
-    private Integer pid;
-
-    /**
-     * 商品分类名称
+     * 品牌名称
      */
     private String name;
 
     /**
-     * 商品分类描述
+     * 品牌描述
      */
     private String description;
 
     /**
-     * 商品分类图片
+     * 品牌名图片
      */
     private String picUrl;
 
     /**
-     * 商品分类排序
+     * 状态
      */
-    private Integer sort;
-
-    /**
-     * 状态：0->关闭;1->开启;
-     */
+    @EnumValue
     private StatusEnum status;
 
     /**
      * 是否被删除：0->已删除;1->未删除;
      */
+    @EnumValue
     private DeletedEnum deleted;
 
     /**

@@ -1,6 +1,6 @@
 package com.ethan.worldwide.account.admin.inter.assembler;
 
-import com.ethan.worldwide.account.admin.domain.bo.user.CreateAdminUserBo;
+import com.ethan.worldwide.account.admin.domain.bo.user.AdminUserBo;
 import com.ethan.worldwide.account.admin.domain.bo.user.LoginAdminUserBo;
 import com.ethan.worldwide.openapi.interfaces.api.dto.AddAdminReq;
 import com.ethan.worldwide.openapi.interfaces.api.dto.LoginAdminReq;
@@ -19,9 +19,14 @@ public interface AdminUserDtoConvert {
     AdminUserDtoConvert INSTANCE = Mappers.getMapper(AdminUserDtoConvert.class);
 
     @Mappings({
-        @Mapping(target = "status", expression = "java(1)")
+        @Mapping(target = "id", ignore = true),
+        @Mapping(target = "status", expression = "java(1)"),
+        @Mapping(target = "deleted", expression = "java(1)"),
+        @Mapping(target = "loginTime", ignore = true),
+        @Mapping(target = "createTime", expression = "java(new java.util.Date(System.currentTimeMillis()))"),
+        @Mapping(target = "updateTime", ignore = true)
     })
-    CreateAdminUserBo toBo(AddAdminReq addAdminReq);
+    AdminUserBo toBo(AddAdminReq addAdminReq);
 
     LoginAdminUserBo toBo(LoginAdminReq loginAdminReq);
 }

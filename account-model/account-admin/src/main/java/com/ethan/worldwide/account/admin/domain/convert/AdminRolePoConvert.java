@@ -1,12 +1,13 @@
 package com.ethan.worldwide.account.admin.domain.convert;
 
-import com.ethan.worldwide.account.admin.domain.bo.role.ContentAdminRoleBo;
-import com.ethan.worldwide.account.admin.domain.bo.role.CreateAdminRoleBo;
+import com.ethan.worldwide.account.admin.domain.bo.role.AdminRoleBo;
 import com.ethan.worldwide.account.admin.infra.dao.po.role.AdminRolePo;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 import org.mapstruct.factory.Mappers;
+
+import java.util.List;
 
 /**
  * @Author zhenghui
@@ -18,12 +19,9 @@ public interface AdminRolePoConvert {
 
     AdminRolePoConvert INSTANCE = Mappers.getMapper(AdminRolePoConvert.class);
 
-    @Mappings({
-        @Mapping(target = "id", ignore = true),
-        @Mapping(target = "createTime", expression = "java(new java.util.Date(System.currentTimeMillis()))"),
-        @Mapping(target = "updateTime", ignore = true)
-    })
-    AdminRolePo createBoToPo(CreateAdminRoleBo createAdminRoleBo);
+    AdminRoleBo toBo(AdminRolePo adminRolePo);
 
-    ContentAdminRoleBo toContentBo(AdminRolePo adminRolePo);
+    AdminRolePo toPo(AdminRoleBo adminRoleBo);
+
+    List<AdminRoleBo> toBo(List<AdminRolePo> adminRolePoList);
 }

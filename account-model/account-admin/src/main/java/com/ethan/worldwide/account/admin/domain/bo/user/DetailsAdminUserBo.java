@@ -1,6 +1,6 @@
 package com.ethan.worldwide.account.admin.domain.bo.user;
 
-import com.ethan.worldwide.account.admin.domain.bo.role.ContentAdminRoleBo;
+import com.ethan.worldwide.account.admin.domain.bo.role.AdminRoleBo;
 import lombok.Data;
 
 import java.util.List;
@@ -12,7 +12,7 @@ import java.util.List;
  */
 @Data
 public class DetailsAdminUserBo {
-    private ContentAdminUserBo contentAdminUserBo;
+    private AdminUserBo adminUserBo;
 
-    private List<ContentAdminRoleBo> contentAdminRoleBoList;
+    private List<AdminRoleBo> contentAdminRoleBoList;
 }

@@ -1,9 +1,8 @@
 package com.ethan.worldwide.account.admin.application.service;
 
 import cn.hutool.crypto.digest.BCrypt;
-import com.ethan.worldwide.account.admin.domain.bo.role.ContentAdminRoleBo;
-import com.ethan.worldwide.account.admin.domain.bo.user.ContentAdminUserBo;
-import com.ethan.worldwide.account.admin.domain.bo.user.CreateAdminUserBo;
+import com.ethan.worldwide.account.admin.domain.bo.role.AdminRoleBo;
+import com.ethan.worldwide.account.admin.domain.bo.user.AdminUserBo;
 import com.ethan.worldwide.account.admin.domain.bo.user.LoginAdminUserBo;
 import com.ethan.worldwide.account.admin.domain.bo.user.QueryAdminUserBo;
 import com.ethan.worldwide.account.admin.domain.service.AdminRoleDomainService;
@@ -48,30 +47,30 @@ public class AdminUserService implements IAuthenticationService {
         // 2.1 获取用户基本信息
         QueryAdminUserBo queryAdminUserBo = new QueryAdminUserBo();
         queryAdminUserBo.setUsername(username);
-        ContentAdminUserBo contentAdminUserBo = adminUserDomainService.get(queryAdminUserBo);
+        AdminUserBo byName = adminUserDomainService.get(queryAdminUserBo);
         AuthenticationUser authenticationUser = new AuthenticationUser();
-        authenticationUser.setUsername(contentAdminUserBo.getUsername());
-        authenticationUser.setPassword(contentAdminUserBo.getPassword());
-        authenticationUser.setIsEnable(contentAdminUserBo.getStatus().equals(1));
+        authenticationUser.setUsername(byName.getUsername());
+        authenticationUser.setPassword(byName.getPassword());
+        authenticationUser.setIsEnable(byName.getStatus().equals(1));
         // 2.2 获取用户的角色信息
-        List<ContentAdminRoleBo> contentAdminRoleBos = adminRoleDomainService.listByUserId(contentAdminUserBo.getId());
-        List<String> collect = contentAdminRoleBos.stream().map(ContentAdminRoleBo::getName).collect(Collectors.toList());
+        List<AdminRoleBo> contentAdminRoleBos = adminRoleDomainService.listByUserId(byName.getId());
+        List<String> collect = contentAdminRoleBos.stream().map(AdminRoleBo::getName).collect(Collectors.toList());
         authenticationUser.setRoles(collect);
         // 3 返回结果信息
         return authenticationUser;
     }
 
-    public Integer sysAdminAddAdminUser(Integer sysAdminUserId, CreateAdminUserBo createAdminUserBo) {
+    public Integer sysAdminAddAdminUser(Integer sysAdminUserId, AdminUserBo adminUserBo) {
         // 1 校验
         // 1.1 验证是否是系统管理员
         QueryAdminUserBo queryById = new QueryAdminUserBo();
         queryById.setId(sysAdminUserId);
-        ContentAdminUserBo byId = adminUserDomainService.get(queryById);
+        AdminUserBo byId = adminUserDomainService.get(queryById);
         if (!appConfig.getUsername().equals(byId.getUsername())) {
             AccountAdminServiceException.assertException(HttpStatus.CONFLICT, "只有系统管理员可以创建后台用户");
         }
         // 2 业务
-        return adminUserDomainService.create(createAdminUserBo);
+        return adminUserDomainService.create(adminUserBo);
         // 3 返回结果
     }
 

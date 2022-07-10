@@ -1,13 +1,14 @@
 package com.ethan.worldwide.mall.product.application.service;
 
-import com.ethan.worldwide.mall.product.domain.bo.brand.ContentProductBrandBo;
-import com.ethan.worldwide.mall.product.domain.bo.brand.CreateProductBrandBo;
+import com.ethan.worldwide.mall.product.domain.bo.brand.ProductBrandBo;
 import com.ethan.worldwide.mall.product.domain.bo.brand.QueryProductBrandBo;
 import com.ethan.worldwide.mall.product.domain.bo.brand.PageProductBrandBo;
 import com.ethan.worldwide.mall.product.domain.bo.brand.PageQueryProductBrandBo;
-import com.ethan.worldwide.mall.product.domain.bo.brand.UpdateProductBrandBo;
+import com.ethan.worldwide.mall.product.domain.bo.brand.valueObject.UpdateProductBrandBo;
 import com.ethan.worldwide.mall.product.domain.service.ProductBrandDomainService;
+import com.ethan.worldwide.mall.product.infra.exception.MallProductServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 /**
@@ -24,14 +25,14 @@ public class ProductBrandService {
     /**
      * 创建商品品牌
      *
-     * @param createProductBrandBo
+     * @param productBrandBo
      * @return
      */
-    public Integer createProductBrand(CreateProductBrandBo createProductBrandBo) {
+    public Integer createProductBrand(ProductBrandBo productBrandBo) {
         // 1 校验
         // 2 业务
         // 3 返回结果
-        return productBrandDomainService.create(createProductBrandBo);
+        return productBrandDomainService.create(productBrandBo);
     }
 
     /**
@@ -40,13 +41,12 @@ public class ProductBrandService {
      * @param brandId
      * @return
      */
-    public ContentProductBrandBo getProductBrandContent(Integer brandId) {
+    public ProductBrandBo getProductBrand(Integer brandId) {
         // 1 校验
+        // 1.1 校验商品品牌是否存在
+        return checkProductBrand(brandId);
         // 2 业务
-        QueryProductBrandBo queryProductBrandBo = new QueryProductBrandBo();
-        queryProductBrandBo.setId(brandId);
         // 3 返回结果
-        return productBrandDomainService.get(queryProductBrandBo);
     }
 
     /**
@@ -58,8 +58,10 @@ public class ProductBrandService {
      */
     public Integer updateProductById(Integer brandId, UpdateProductBrandBo updateProductBrandBo) {
         // 1 校验
+        // 1.1 验证商品实例是否存在
+        ProductBrandBo productBrandBo = checkProductBrand(brandId);
         // 2 业务
-        return productBrandDomainService.updateById(brandId, updateProductBrandBo);
+        return productBrandDomainService.updateById(productBrandBo, updateProductBrandBo);
         // 3 返回结果
     }
 
@@ -74,5 +76,15 @@ public class ProductBrandService {
         // 2 业务
         return productBrandDomainService.page(pageQueryProductBrandBo);
         // 3 返回结果
+    }
+
+    private ProductBrandBo checkProductBrand(Integer brandId) {
+        QueryProductBrandBo queryProductBrandBo = new QueryProductBrandBo();
+        queryProductBrandBo.setId(brandId);
+        ProductBrandBo productBrandBo = productBrandDomainService.get(queryProductBrandBo);
+        if (productBrandBo == null) {
+            MallProductServiceException.assertException(HttpStatus.NOT_FOUND, "获取商品品牌内容失败");
+        }
+        return productBrandBo;
     }
 }

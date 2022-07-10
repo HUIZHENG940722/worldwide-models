@@ -14,5 +14,5 @@ public class PageProductBrandBo {
 
     private Integer total;
 
-    private List<ContentProductBrandBo> data;
+    private List<ProductBrandBo> data;
 }

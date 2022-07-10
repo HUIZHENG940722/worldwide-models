@@ -14,5 +14,5 @@ public class PageProductCategoryBo {
 
     private Integer total;
 
-    private List<ContentProductCategoryBo> data;
+    private List<ProductCategoryBo> data;
 }

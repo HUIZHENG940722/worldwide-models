@@ -2,18 +2,13 @@ package com.ethan.worldwide.mall.product.inter.controller;
 
 import com.ethan.worldwide.mall.product.application.service.ProductCategoryService;
 import com.ethan.worldwide.mall.product.domain.bo.category.PageProductCategoryBo;
-import com.ethan.worldwide.mall.product.domain.bo.category.UpdateProductCategoryBo;
+import com.ethan.worldwide.mall.product.domain.bo.category.ProductCategoryBo;
+import com.ethan.worldwide.mall.product.domain.bo.category.valueObject.UpdateProductCategoryBo;
 import com.ethan.worldwide.mall.product.infra.exception.MallProductServiceException;
 import com.ethan.worldwide.mall.product.inter.assembler.ProductCategoryDtoConvert;
 import com.ethan.worldwide.openapi.interfaces.api.MallProductCategoryApi;
-import com.ethan.worldwide.openapi.interfaces.api.dto.ContentProductCategoryResp;
-import com.ethan.worldwide.openapi.interfaces.api.dto.CreateProductCategoryReq;
-import com.ethan.worldwide.openapi.interfaces.api.dto.PageProductCategoryResp;
-import com.ethan.worldwide.openapi.interfaces.api.dto.PageQueryProductCategoryReq;
-import com.ethan.worldwide.mall.product.domain.bo.category.ContentProductCategoryBo;
-import com.ethan.worldwide.mall.product.domain.bo.category.CreateProductCategoryBo;
+import com.ethan.worldwide.openapi.interfaces.api.dto.*;
 import com.ethan.worldwide.mall.product.domain.bo.category.PageQueryProductCategoryBo;
-import com.ethan.worldwide.openapi.interfaces.api.dto.UpdateProductCategoryReq;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,9 +28,9 @@ public class ProductCategoryController implements MallProductCategoryApi {
     @Override
     public ResponseEntity<Integer> createProductCategory(CreateProductCategoryReq createProductCategoryReq) {
         // 1 数据转换
-        CreateProductCategoryBo createProductCategoryBo = ProductCategoryDtoConvert.INSTANCE.toBo(createProductCategoryReq);
+         ProductCategoryBo productCategoryBo = ProductCategoryDtoConvert.INSTANCE.toBo(createProductCategoryReq);
         // 2 业务
-        Integer categoryId = productCategoryService.createProductCategory(createProductCategoryBo);
+        Integer categoryId = productCategoryService.createProductCategory(productCategoryBo);
         // 3 返回结果
         if (categoryId == null) {
             MallProductServiceException.assertException(HttpStatus.INTERNAL_SERVER_ERROR, "创建商品分类失败");
@@ -44,16 +39,16 @@ public class ProductCategoryController implements MallProductCategoryApi {
     }
 
     @Override
-    public ResponseEntity<ContentProductCategoryResp> getProductCategoryContent(Integer categoryId) {
+    public ResponseEntity<ProductCategoryResp> getProductCategoryContent(Integer categoryId) {
         // 1 数据转换
         // 2 业务
-        ContentProductCategoryBo contentProductCategoryBo = productCategoryService.getProductCategoryContent(categoryId);
+        ProductCategoryBo productCategoryBo = productCategoryService.getProductCategoryContent(categoryId);
         // 3 返回结果
-        if (contentProductCategoryBo == null) {
+        if (productCategoryBo == null) {
             MallProductServiceException.assertException(HttpStatus.NOT_FOUND, "获取商品分类内容失败");
         }
-        ContentProductCategoryResp contentProductCategoryResp = ProductCategoryDtoConvert.INSTANCE.toContentResp(contentProductCategoryBo);
-        return new ResponseEntity<>(contentProductCategoryResp, HttpStatus.OK);
+        ProductCategoryResp productCategoryResp = ProductCategoryDtoConvert.INSTANCE.toResp(productCategoryBo);
+        return new ResponseEntity<>(productCategoryResp, HttpStatus.OK);
     }
 
     @Override

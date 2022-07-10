@@ -21,7 +21,7 @@ public class ProductBrandControllerTests extends MallProductApplicationTests {
      */
     @Test
     public void createProductBrandTestSuccess() throws Exception {
-        String contentAsString = post("/product/brand", buildSuccessCreateProductBrandReq())
+        String contentAsString = post("/mall/product/brand", buildSuccessCreateProductBrandReq())
             .andExpect(MockMvcResultMatchers.status().isCreated()).andReturn().getResponse()
             .getContentAsString();
         Assertions.assertNotNull(contentAsString);
@@ -29,11 +29,11 @@ public class ProductBrandControllerTests extends MallProductApplicationTests {
 
     @Test
     public void createProductBrandTestFail() throws Exception {
-        String contentAsString = post("/product/brand", buildSuccessCreateProductBrandReq())
+        String contentAsString = post("/mall/product/brand", buildSuccessCreateProductBrandReq())
             .andExpect(MockMvcResultMatchers.status().isCreated()).andReturn().getResponse()
             .getContentAsString();
         Assertions.assertNotNull(contentAsString);
-        post("/product/brand", buildSuccessCreateProductBrandReq())
+        post("/mall/product/brand", buildSuccessCreateProductBrandReq())
             .andExpect(MockMvcResultMatchers.status().isConflict());
     }
 
@@ -55,11 +55,11 @@ public class ProductBrandControllerTests extends MallProductApplicationTests {
 
     @Test
     public void getProductBrandContentSuccess() throws Exception {
-        String contentAsString = post("/product/brand", buildSuccessCreateProductBrandReq())
+        String contentAsString = post("/mall/product/brand", buildSuccessCreateProductBrandReq())
             .andExpect(MockMvcResultMatchers.status().isCreated()).andReturn().getResponse()
             .getContentAsString();
         Assertions.assertNotNull(contentAsString);
-        get("/product/brand/{brand_id}".replace("{brand_id}", contentAsString)).andExpect(MockMvcResultMatchers.status().isOk());
+        get("/mall/product/brand/{brand_id}".replace("{brand_id}", contentAsString)).andExpect(MockMvcResultMatchers.status().isOk());
     }
 
     @Test
@@ -69,23 +69,23 @@ public class ProductBrandControllerTests extends MallProductApplicationTests {
 
     @Test
     public void updateProductBrandSuccess() throws Exception {
-        String contentAsString = post("/product/brand", buildSuccessCreateProductBrandReq())
+        String contentAsString = post("/mall/product/brand", buildSuccessCreateProductBrandReq())
             .andExpect(MockMvcResultMatchers.status().isCreated()).andReturn().getResponse()
             .getContentAsString();
         Assertions.assertNotNull(contentAsString);
-        put("/product/brand/{brand_id}".replace("{brand_id}", contentAsString),
+        put("/mall/product/brand/{brand_id}".replace("{brand_id}", contentAsString),
             buildSuccessUpdateProductBrandReq()).andExpect(MockMvcResultMatchers.status().isOk());
     }
 
     @Test
     public void updateProductBrandFail() throws Exception {
-        String contentAsString = post("/product/brand", buildSuccessCreateProductBrandReq())
+        String contentAsString = post("/mall/product/brand", buildSuccessCreateProductBrandReq())
             .andExpect(MockMvcResultMatchers.status().isCreated()).andReturn().getResponse()
             .getContentAsString();
-        post("/product/brand", buildSuccessCreateProductBrandReq2())
+        post("/mall/product/brand", buildSuccessCreateProductBrandReq2())
             .andExpect(MockMvcResultMatchers.status().isCreated()).andReturn().getResponse()
             .getContentAsString();
-        put("/product/brand/{brand_id}".replace("{brand_id}", contentAsString),
+        put("/mall/product/brand/{brand_id}".replace("{brand_id}", contentAsString),
             buildSuccessUpdateProductBrandReq2()).andExpect(MockMvcResultMatchers.status().isConflict());
     }
 
@@ -107,10 +107,10 @@ public class ProductBrandControllerTests extends MallProductApplicationTests {
 
     @Test
     public void pageProductBrandContentSuccess() throws Exception {
-        post("/product/brand", buildSuccessCreateProductBrandReq())
+        post("/mall/product/brand", buildSuccessCreateProductBrandReq())
             .andExpect(MockMvcResultMatchers.status().isCreated()).andReturn().getResponse()
             .getContentAsString();
-        get("/product/brand/page", buildPageQueryProductBrandReq()).andExpect(MockMvcResultMatchers.status().isOk());
+        get("/mall/product/brand/page", buildPageQueryProductBrandReq()).andExpect(MockMvcResultMatchers.status().isOk());
     }
 
     private PageQueryProductBrandReq buildPageQueryProductBrandReq() {

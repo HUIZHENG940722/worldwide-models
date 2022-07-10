@@ -1,8 +1,7 @@
 package com.ethan.worldwide.mall.product.domain.convert;
 
-import com.ethan.worldwide.mall.product.domain.bo.brand.ContentProductBrandBo;
-import com.ethan.worldwide.mall.product.domain.bo.brand.CreateProductBrandBo;
-import com.ethan.worldwide.mall.product.domain.bo.brand.UpdateProductBrandBo;
+import com.ethan.worldwide.mall.product.domain.bo.brand.ProductBrandBo;
+import com.ethan.worldwide.mall.product.domain.bo.brand.valueObject.UpdateProductBrandBo;
 import com.ethan.worldwide.mall.product.infra.dao.po.brand.ProductBrandPo;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -23,21 +22,16 @@ public interface ProductBrandPoConvert {
 
     @Mappings({
         @Mapping(target = "id", ignore = true),
-        @Mapping(target = "deleted", expression = "java(com.ethan.worldwide.mall.product.infra.dao.enums.DeletedEnum.NUMBER_1)"),
-        @Mapping(target = "createTime", expression = "java(new java.util.Date(System.currentTimeMillis()))"),
-        @Mapping(target = "updateTime", ignore = true)
-    })
-    ProductBrandPo createBoToPo(CreateProductBrandBo createProductBrandBo);
-
-    ContentProductBrandBo toContentBo(ProductBrandPo productBrandPo);
-
-    @Mappings({
-        @Mapping(target = "id", ignore = true),
         @Mapping(target = "deleted", ignore = true),
         @Mapping(target = "createTime", ignore = true),
         @Mapping(target = "updateTime", expression = "java(new java.util.Date(System.currentTimeMillis()))")
     })
     ProductBrandPo updateBoToPo(UpdateProductBrandBo updateProductBrandBo);
 
-    List<ContentProductBrandBo> toContentBo(List<ProductBrandPo> records);
+
+    ProductBrandBo toBo(ProductBrandPo productBrandPo);
+
+    ProductBrandPo toPo(ProductBrandBo productBrandBo);
+
+    List<ProductBrandBo> toBo(List<ProductBrandPo> productBrandPoList);
 }

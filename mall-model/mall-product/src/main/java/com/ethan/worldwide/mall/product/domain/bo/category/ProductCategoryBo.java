@@ -1,15 +1,23 @@
 package com.ethan.worldwide.mall.product.domain.bo.category;
 
+import com.ethan.worldwide.mall.product.infra.dao.enums.DeletedEnum;
 import com.ethan.worldwide.mall.product.infra.dao.enums.StatusEnum;
 import lombok.Data;
 
+import java.util.Date;
+
 /**
- * @Author zWX1058539
- * @Description 更新商品分类BO
- * @Date 2022/6/30
+ * @Author zhenghui
+ * @Description 商品分类BO
+ * @Date 2022/7/10
  */
 @Data
-public class UpdateProductCategoryBo {
+public class ProductCategoryBo {
+
+    /**
+     * 商品分类编码
+     */
+    private Integer id;
 
     /**
      * 商品分类父编码
@@ -40,4 +48,19 @@ public class UpdateProductCategoryBo {
      * 状态：0->关闭;1->开启;
      */
     private StatusEnum status;
+
+    /**
+     * 是否被删除：0->已删除;1->未删除;
+     */
+    private DeletedEnum deleted;
+
+    /**
+     * 创建时间
+     */
+    private Date createTime;
+
+    /**
+     * 更新时间
+     */
+    private Date updateTime;
 }

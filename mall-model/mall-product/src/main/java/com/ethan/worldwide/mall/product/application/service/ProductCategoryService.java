@@ -1,13 +1,14 @@
 package com.ethan.worldwide.mall.product.application.service;
 
 import com.ethan.worldwide.mall.product.domain.bo.category.PageProductCategoryBo;
-import com.ethan.worldwide.mall.product.domain.bo.category.UpdateProductCategoryBo;
-import com.ethan.worldwide.mall.product.domain.bo.category.ContentProductCategoryBo;
-import com.ethan.worldwide.mall.product.domain.bo.category.CreateProductCategoryBo;
+import com.ethan.worldwide.mall.product.domain.bo.category.ProductCategoryBo;
+import com.ethan.worldwide.mall.product.domain.bo.category.valueObject.UpdateProductCategoryBo;
 import com.ethan.worldwide.mall.product.domain.bo.category.PageQueryProductCategoryBo;
 import com.ethan.worldwide.mall.product.domain.bo.category.QueryProductCategoryBo;
 import com.ethan.worldwide.mall.product.domain.service.ProductCategoryDomainService;
+import com.ethan.worldwide.mall.product.infra.exception.MallProductServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 /**
@@ -22,15 +23,17 @@ public class ProductCategoryService {
     private ProductCategoryDomainService productCategoryDomainService;
 
 
-    public Integer createProductCategory(CreateProductCategoryBo createProductCategoryBo) {
+    public Integer createProductCategory(ProductCategoryBo productCategoryBo) {
         // 1 校验
         // 2 业务
-        return productCategoryDomainService.create(createProductCategoryBo);
+        return productCategoryDomainService.create(productCategoryBo);
         // 3 返回结果
     }
 
-    public ContentProductCategoryBo getProductCategoryContent(Integer categoryId) {
+    public ProductCategoryBo getProductCategoryContent(Integer categoryId) {
         // 1 校验
+        // 1.1 校验商品分类是否存在
+        checkProductCategory(categoryId);
         // 2 业务
         QueryProductCategoryBo queryProductCategoryBo = new QueryProductCategoryBo();
         queryProductCategoryBo.setId(categoryId);
@@ -40,8 +43,10 @@ public class ProductCategoryService {
 
     public Integer updateProductCategory(Integer categoryId, UpdateProductCategoryBo updateProductCategoryBo) {
         // 1 校验
+        // 1.1 校验商品分类是否存在
+        ProductCategoryBo byId = checkProductCategory(categoryId);
         // 2 业务
-        return productCategoryDomainService.updateById(categoryId, updateProductCategoryBo);
+        return productCategoryDomainService.updateById(byId, updateProductCategoryBo);
         // 3 返回结果
     }
 
@@ -50,5 +55,15 @@ public class ProductCategoryService {
         // 2 业务
         return productCategoryDomainService.page(pageQueryProductCategoryBo);
         // 3 返回结果
+    }
+
+    private ProductCategoryBo checkProductCategory(Integer categoryId) {
+        QueryProductCategoryBo queryById = new QueryProductCategoryBo();
+        queryById.setId(categoryId);
+        ProductCategoryBo byId = productCategoryDomainService.get(queryById);
+        if (byId == null) {
+            MallProductServiceException.assertException(HttpStatus.NOT_FOUND, "商品分类不存在");
+        }
+        return byId;
     }
 }

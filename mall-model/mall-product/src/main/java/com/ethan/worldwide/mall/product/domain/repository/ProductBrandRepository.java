@@ -4,16 +4,14 @@ import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.ethan.worldwide.mall.product.domain.bo.brand.ContentProductBrandBo;
-import com.ethan.worldwide.mall.product.domain.bo.brand.CreateProductBrandBo;
-import com.ethan.worldwide.mall.product.domain.bo.brand.PageQueryProductBrandBo;
-import com.ethan.worldwide.mall.product.domain.bo.brand.QueryProductBrandBo;
+import com.ethan.worldwide.mall.product.domain.bo.brand.*;
+import com.ethan.worldwide.mall.product.domain.bo.brand.valueObject.UpdateProductBrandBo;
 import com.ethan.worldwide.mall.product.infra.dao.ProductBrandMapper;
-import com.ethan.worldwide.mall.product.domain.bo.brand.PageProductBrandBo;
-import com.ethan.worldwide.mall.product.domain.bo.brand.UpdateProductBrandBo;
 import com.ethan.worldwide.mall.product.domain.convert.ProductBrandPoConvert;
 import com.ethan.worldwide.mall.product.infra.dao.po.brand.ProductBrandPo;
+import com.ethan.worldwide.mall.product.infra.exception.MallProductServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -27,13 +25,17 @@ public class ProductBrandRepository {
     @Autowired
     private ProductBrandMapper productBrandMapper;
 
-    public Integer add(CreateProductBrandBo createProductBrandBo) {
-        ProductBrandPo boToPo = ProductBrandPoConvert.INSTANCE.createBoToPo(createProductBrandBo);
-        productBrandMapper.insert(boToPo);
+    public Integer add(ProductBrandBo productBrandBo) {
+        ProductBrandPo boToPo = ProductBrandPoConvert.INSTANCE.toPo(productBrandBo);
+        try {
+            productBrandMapper.insert(boToPo);
+        } catch (MallProductServiceException e) {
+            MallProductServiceException.assertException(HttpStatus.INTERNAL_SERVER_ERROR, "插入商品品牌异常");
+        }
         return boToPo.getId();
     }
 
-    public ContentProductBrandBo get(QueryProductBrandBo queryProductBrandBo) {
+    public ProductBrandBo get(QueryProductBrandBo queryProductBrandBo) {
         LambdaQueryWrapper<ProductBrandPo> lambdaQueryWrapper = getLambdaQueryWrapper();
         if (queryProductBrandBo.getId() != null) {
             lambdaQueryWrapper.eq(ProductBrandPo::getId, queryProductBrandBo.getId());
@@ -41,22 +43,33 @@ public class ProductBrandRepository {
         if (StrUtil.isNotEmpty(queryProductBrandBo.getName())) {
             lambdaQueryWrapper.eq(ProductBrandPo::getName, queryProductBrandBo.getName());
         }
-        ProductBrandPo productBrandPo = productBrandMapper.selectOne(lambdaQueryWrapper);
-        return productBrandPo != null ? ProductBrandPoConvert.INSTANCE.toContentBo(productBrandPo) : null;
+        ProductBrandPo productBrandPo = null;
+        try {
+            productBrandPo = productBrandMapper.selectOne(lambdaQueryWrapper);
+        } catch (MallProductServiceException e) {
+            MallProductServiceException.assertException(HttpStatus.INTERNAL_SERVER_ERROR, "查询商品品牌异常");
+        }
+        return productBrandPo != null ? ProductBrandPoConvert.INSTANCE.toBo(productBrandPo) : null;
     }
 
     public Integer updateById(Integer id, UpdateProductBrandBo updateProductBrandBo) {
         ProductBrandPo productBrandPo = ProductBrandPoConvert.INSTANCE.updateBoToPo(updateProductBrandBo);
         productBrandPo.setId(id);
-        return productBrandMapper.updateById(productBrandPo);
+        Integer update = null;
+        try {
+            update = productBrandMapper.updateById(productBrandPo);
+        } catch (MallProductServiceException e) {
+            MallProductServiceException.assertException(HttpStatus.INTERNAL_SERVER_ERROR, "更新商品品牌异常");
+        }
+        return update;
     }
 
     public PageProductBrandBo page(PageQueryProductBrandBo pageQueryProductBrandBo) {
         LambdaQueryWrapper<ProductBrandPo> lambdaQueryWrapper = getLambdaQueryWrapper();
-        if (pageQueryProductBrandBo.getId()!=null) {
+        if (pageQueryProductBrandBo.getId() != null) {
             lambdaQueryWrapper.eq(ProductBrandPo::getId, pageQueryProductBrandBo.getId());
         }
-        if (pageQueryProductBrandBo.getStatus()!=null) {
+        if (pageQueryProductBrandBo.getStatus() != null) {
             lambdaQueryWrapper.eq(ProductBrandPo::getStatus, pageQueryProductBrandBo.getStatus());
         }
         if (StrUtil.isNotEmpty(pageQueryProductBrandBo.getName()) && StrUtil.isNotBlank(pageQueryProductBrandBo.getName().trim())) {
@@ -66,7 +79,7 @@ public class ProductBrandRepository {
         Page<ProductBrandPo> productBrandPoPage = productBrandMapper.selectPage(objectPage, lambdaQueryWrapper);
         PageProductBrandBo pageProductBrandBo = new PageProductBrandBo();
         pageProductBrandBo.setTotal(pageProductBrandBo.getTotal());
-        pageProductBrandBo.setData(ProductBrandPoConvert.INSTANCE.toContentBo(productBrandPoPage.getRecords()));
+        pageProductBrandBo.setData(ProductBrandPoConvert.INSTANCE.toBo(productBrandPoPage.getRecords()));
         return pageProductBrandBo;
     }
 

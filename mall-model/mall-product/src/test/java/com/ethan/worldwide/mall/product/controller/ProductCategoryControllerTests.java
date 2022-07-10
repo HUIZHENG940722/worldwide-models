@@ -16,12 +16,12 @@ public class ProductCategoryControllerTests extends MallProductApplicationTests 
 
     @Test
     public void createProductCategoryTestSuccess() throws Exception {
-        post("/product/category", buildSuccessCreateProductCategoryReq()).andExpect(MockMvcResultMatchers.status().isCreated());
+        post("/mall/product/category", buildSuccessCreateProductCategoryReq()).andExpect(MockMvcResultMatchers.status().isCreated());
     }
 
     @Test
     public void createProductCategoryTestFail() throws Exception {
-        post("/product/category", buildFailCreateProductCategoryReq()).andExpect(MockMvcResultMatchers.status().isNotFound());
+        post("/mall/product/category", buildFailCreateProductCategoryReq()).andExpect(MockMvcResultMatchers.status().isNotFound());
     }
 
     private CreateProductCategoryReq buildSuccessCreateProductCategoryReq() {
@@ -56,30 +56,30 @@ public class ProductCategoryControllerTests extends MallProductApplicationTests 
 
     @Test
     public void getProductCategoryContentTestSuccess() throws Exception {
-        String contentAsString = post("/product/category", buildSuccessCreateProductCategoryReq()).andExpect(MockMvcResultMatchers.status().isCreated())
+        String contentAsString = post("/mall/product/category", buildSuccessCreateProductCategoryReq()).andExpect(MockMvcResultMatchers.status().isCreated())
             .andReturn().getResponse().getContentAsString();
-        get("/product/category/{category_id}".replace("{category_id}", contentAsString)).andExpect(MockMvcResultMatchers.status().isOk());
+        get("/mall/product/category/{category_id}".replace("{category_id}", contentAsString)).andExpect(MockMvcResultMatchers.status().isOk());
     }
 
     @Test
     public void getProductCategoryContentTestFail() throws Exception {
-        get("/product/category/{category_id}".replace("{category_id}", "100")).andExpect(MockMvcResultMatchers.status().isNotFound());
+        get("/mall/product/category/{category_id}".replace("{category_id}", "100")).andExpect(MockMvcResultMatchers.status().isNotFound());
     }
 
     @Test
     public void updateProductCategoryTestSuccess() throws Exception {
-        String contentAsString = post("/product/category", buildSuccessCreateProductCategoryReq()).andExpect(MockMvcResultMatchers.status().isCreated())
+        String contentAsString = post("/mall/product/category", buildSuccessCreateProductCategoryReq()).andExpect(MockMvcResultMatchers.status().isCreated())
             .andReturn().getResponse().getContentAsString();
-        put("/product/category/{category_id}".replace("{category_id}", contentAsString), buildUpdateProductCategoryReq())
+        put("/mall/product/category/{category_id}".replace("{category_id}", contentAsString), buildUpdateProductCategoryReq())
             .andExpect(MockMvcResultMatchers.status().isOk());
     }
 
     @Test
     public void updateProductCategoryTestFail() throws Exception {
-        String contentAsString = post("/product/category", buildSuccessCreateProductCategoryReq()).andExpect(MockMvcResultMatchers.status().isCreated())
+        String contentAsString = post("/mall/product/category", buildSuccessCreateProductCategoryReq()).andExpect(MockMvcResultMatchers.status().isCreated())
             .andReturn().getResponse().getContentAsString();
-        post("/product/category", buildSuccessCreateProductCategoryReq2());
-        put("/product/category/{category_id}".replace("{category_id}", contentAsString), buildUpdateProductCategoryReq())
+        post("/mall/product/category", buildSuccessCreateProductCategoryReq2());
+        put("/mall/product/category/{category_id}".replace("{category_id}", contentAsString), buildUpdateProductCategoryReq())
             .andExpect(MockMvcResultMatchers.status().isConflict());
 
     }
@@ -92,7 +92,7 @@ public class ProductCategoryControllerTests extends MallProductApplicationTests 
 
     @Test
     public void pageProductCategoryContentTestSuccess() throws Exception {
-        get("/product/category/page", buildPageQueryProductCategoryReq() ).andExpect(MockMvcResultMatchers.status().isOk());
+        get("/mall/product/category/page", buildPageQueryProductCategoryReq() ).andExpect(MockMvcResultMatchers.status().isOk());
     }
 
     private PageQueryProductCategoryReq buildPageQueryProductCategoryReq() {

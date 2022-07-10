@@ -1,7 +1,6 @@
 package com.ethan.worldwide.account.admin.domain.service;
 
-import com.ethan.worldwide.account.admin.domain.bo.role.ContentAdminRoleBo;
-import com.ethan.worldwide.account.admin.domain.bo.role.CreateAdminRoleBo;
+import com.ethan.worldwide.account.admin.domain.bo.role.AdminRoleBo;
 import com.ethan.worldwide.account.admin.domain.bo.role.QueryAdminRoleBo;
 import com.ethan.worldwide.account.admin.domain.repository.AdminRoleRepository;
 import com.ethan.worldwide.account.admin.infra.exception.AccountAdminServiceException;
@@ -26,21 +25,21 @@ public class AdminRoleDomainService {
     /**
      * 创建后台用户角色
      *
-     * @param createAdminRoleBo
+     * @param adminRoleBo
      * @return
      */
     @Transactional
-    public Integer create(CreateAdminRoleBo createAdminRoleBo) {
+    public Integer create(AdminRoleBo adminRoleBo) {
         // 1 核心校验
         // 1.1 角色名称是否重复
         QueryAdminRoleBo queryAdminRoleBo = new QueryAdminRoleBo();
-        queryAdminRoleBo.setName(createAdminRoleBo.getName());
-        ContentAdminRoleBo byName = adminRoleRepository.get(queryAdminRoleBo);
+        queryAdminRoleBo.setName(adminRoleBo.getName());
+        AdminRoleBo byName = adminRoleRepository.get(queryAdminRoleBo);
         if (byName != null) {
             AccountAdminServiceException.assertException(HttpStatus.CONFLICT, "角色名称重复");
         }
         // 2 核心业务
-        return adminRoleRepository.add(createAdminRoleBo);
+        return adminRoleRepository.add(adminRoleBo);
         // 3 返回结果
     }
 
@@ -50,7 +49,7 @@ public class AdminRoleDomainService {
      * @param queryAdminRoleBo
      * @return
      */
-    public ContentAdminRoleBo get(QueryAdminRoleBo queryAdminRoleBo) {
+    public AdminRoleBo get(QueryAdminRoleBo queryAdminRoleBo) {
         // 1 核心校验
         // 2 核心业务
         return adminRoleRepository.get(queryAdminRoleBo);
@@ -63,7 +62,7 @@ public class AdminRoleDomainService {
      * @param userId
      * @return
      */
-    public List<ContentAdminRoleBo> listByUserId(Integer userId) {
+    public List<AdminRoleBo> listByUserId(Integer userId) {
         // 1 核心校验
         // 2 核心业务
         return adminRoleRepository.listByUserId(userId);
