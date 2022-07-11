@@ -79,6 +79,7 @@
                             <generatorName>spring</generatorName>
                             <apiPackage>com.ethan.worldwide.openapi.interfaces.api</apiPackage>
                             <modelPackage>com.ethan.worldwide.openapi.interfaces.api.dto</modelPackage>
+                            <auth>Authorization:header</auth>
                             <library>spring-boot</library>
                             <ignoreFileOverride>true</ignoreFileOverride>
                             <configOptions>
@@ -90,6 +91,7 @@
                                 <additionalProperty>skipDefaultInterface=true</additionalProperty>
                                 <additionalProperty>useTags=true</additionalProperty>
                                 <additionalProperty>optionalProjectFile=true</additionalProperty>
+                                <additionalProperty>addTestCompileSourceRoot=true</additionalProperty>
                             </additionalProperties>
                             <generateApis>true</generateApis>
                             <generateModels>true</generateModels>
