@@ -13,6 +13,6 @@ import java.util.List;
  * @Date 2022/6/30
  */
 @Mapper
-public interface AdminRoleMapper extends BaseMapper<SystemRolePo> {
+public interface SystemRoleMapper extends BaseMapper<SystemRolePo> {
     List<SystemRolePo> listByUserId(@Param("userId") Integer userId);
 }
