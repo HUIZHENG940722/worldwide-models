@@ -1,4 +1,4 @@
-create table if not exists admin_user
+create table if not exists system_user
 (
     id          int auto_increment comment '用户编码'
         primary key,

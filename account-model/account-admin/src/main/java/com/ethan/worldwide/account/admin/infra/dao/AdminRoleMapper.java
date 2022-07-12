@@ -1,7 +1,7 @@
 package com.ethan.worldwide.account.admin.infra.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.ethan.worldwide.account.admin.infra.dao.po.role.AdminRolePo;
+import com.ethan.worldwide.account.admin.infra.dao.po.role.SystemRolePo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -13,6 +13,6 @@ import java.util.List;
  * @Date 2022/6/30
  */
 @Mapper
-public interface AdminRoleMapper extends BaseMapper<AdminRolePo> {
-    List<AdminRolePo> listByUserId(@Param("userId") Integer userId);
+public interface AdminRoleMapper extends BaseMapper<SystemRolePo> {
+    List<SystemRolePo> listByUserId(@Param("userId") Integer userId);
 }

@@ -8,7 +8,7 @@ import lombok.Data;
  * @Date 2022/7/3
  */
 @Data
-public class LoginAdminUserBo {
+public class LoginSystemUserBo {
     private String username;
     private String password;
 }

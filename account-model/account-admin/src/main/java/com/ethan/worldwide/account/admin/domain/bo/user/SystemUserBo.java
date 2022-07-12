@@ -10,7 +10,7 @@ import java.util.Date;
  * @Date 2022/7/10
  */
 @Data
-public class AdminUserBo {
+public class SystemUserBo {
     /**
      * 用户编码
      */

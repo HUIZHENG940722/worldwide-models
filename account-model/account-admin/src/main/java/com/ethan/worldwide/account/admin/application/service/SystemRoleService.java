@@ -1,6 +1,6 @@
 package com.ethan.worldwide.account.admin.application.service;
 
-import com.ethan.worldwide.account.admin.domain.service.AdminRoleDomainService;
+import com.ethan.worldwide.account.admin.domain.service.SystemRoleDomainService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,9 +10,9 @@ import org.springframework.stereotype.Service;
  * @Date 2022/6/30
  */
 @Service
-public class AdminRoleService {
+public class SystemRoleService {
 
     @Autowired
-    private AdminRoleDomainService adminRoleDomainService;
+    private SystemRoleDomainService systemRoleDomainService;
 
 }

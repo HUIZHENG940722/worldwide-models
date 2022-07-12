@@ -11,8 +11,8 @@ import java.util.Date;
  * @Date 2022/6/26
  */
 @Data
-@TableName(value = "admin_user")
-public class AdminUserPo {
+@TableName(value = "system_user")
+public class SystemUserPo {
     /**
      * 用户编码
      */

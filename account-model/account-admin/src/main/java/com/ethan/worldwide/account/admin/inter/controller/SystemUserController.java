@@ -1,11 +1,11 @@
 package com.ethan.worldwide.account.admin.inter.controller;
 
 import cn.hutool.core.util.StrUtil;
-import com.ethan.worldwide.account.admin.application.service.AdminUserService;
-import com.ethan.worldwide.account.admin.domain.bo.user.AdminUserBo;
-import com.ethan.worldwide.account.admin.domain.bo.user.LoginAdminUserBo;
+import com.ethan.worldwide.account.admin.application.service.SystemUserService;
+import com.ethan.worldwide.account.admin.domain.bo.user.LoginSystemUserBo;
+import com.ethan.worldwide.account.admin.domain.bo.user.SystemUserBo;
 import com.ethan.worldwide.account.admin.infra.exception.AccountAdminServiceException;
-import com.ethan.worldwide.account.admin.inter.assembler.AdminUserDtoConvert;
+import com.ethan.worldwide.account.admin.inter.assembler.SystemUserDtoConvert;
 import com.ethan.worldwide.common.bo.AuthenticationUser;
 import com.ethan.worldwide.openapi.interfaces.api.AccountAdminApi;
 import com.ethan.worldwide.openapi.interfaces.api.dto.AddAdminReq;
@@ -23,17 +23,17 @@ import org.springframework.web.bind.annotation.RestController;
  * @Date 2022/6/26
  */
 @RestController
-public class AdminUserController implements AccountAdminApi {
+public class SystemUserController implements AccountAdminApi {
 
     @Autowired
-    private AdminUserService adminUserService;
+    private SystemUserService systemUserService;
 
     @Override
     public ResponseEntity<String> login(LoginAdminReq loginAdminReq) {
         // 1 数据转换
-        LoginAdminUserBo loginAdminUserBo = AdminUserDtoConvert.INSTANCE.toBo(loginAdminReq);
+        LoginSystemUserBo loginSystemUserBo = SystemUserDtoConvert.INSTANCE.toBo(loginAdminReq);
         // 2 业务
-        String accessToken = adminUserService.login(loginAdminUserBo);
+        String accessToken = systemUserService.login(loginSystemUserBo);
         // 3 返回结果
         if (StrUtil.isBlank(accessToken)) {
             AccountAdminServiceException.assertException(HttpStatus.INTERNAL_SERVER_ERROR, "登录获取token失败");
@@ -44,9 +44,9 @@ public class AdminUserController implements AccountAdminApi {
     @Override
     public ResponseEntity<Integer> sysAdminAddAdminUser(Integer sysAdminUserId, AddAdminReq addAdminReq) {
         // 1 数据转换
-        AdminUserBo adminUserBo = AdminUserDtoConvert.INSTANCE.toBo(addAdminReq);
+        SystemUserBo systemUserBo = SystemUserDtoConvert.INSTANCE.toBo(addAdminReq);
         // 2 业务
-        Integer adminUserId = adminUserService.sysAdminAddAdminUser(sysAdminUserId, adminUserBo);
+        Integer adminUserId = systemUserService.sysAdminAddAdminUser(sysAdminUserId, systemUserBo);
         // 3 返回结果
         if (adminUserId == null) {
             AccountAdminServiceException.assertException(HttpStatus.INTERNAL_SERVER_ERROR, "创建后台用户失败");
@@ -62,6 +62,6 @@ public class AdminUserController implements AccountAdminApi {
      */
     @GetMapping(value = "/loadUserByUsername")
     public AuthenticationUser loadUserByUsername(@RequestParam(value = "username") String username) {
-        return adminUserService.loadUserByUsername(username);
+        return systemUserService.loadUserByUsername(username);
     }
 }

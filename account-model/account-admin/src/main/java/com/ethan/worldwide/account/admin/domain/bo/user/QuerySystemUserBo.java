@@ -8,7 +8,7 @@ import lombok.Data;
  * @Date 2022/6/27
  */
 @Data
-public class QueryAdminUserBo {
+public class QuerySystemUserBo {
     private Integer id;
 
     private String username;

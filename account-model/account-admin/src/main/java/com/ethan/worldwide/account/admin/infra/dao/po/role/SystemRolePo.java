@@ -1,20 +1,22 @@
-package com.ethan.worldwide.account.admin.domain.bo.role;
+package com.ethan.worldwide.account.admin.infra.dao.po.role;
 
+import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
 
 import java.util.Date;
 
 /**
  * @Author zhenghui
- * @Description 后台管理员角色BO
- * @Date 2022/7/10
+ * @Description 后台用户角色PO
+ * @Date 2022/6/30
  */
 @Data
-public class AdminRoleBo {
-
+@TableName(value = "system_role")
+public class SystemRolePo {
     /**
      * 角色编码
      */
+    @TableId(type = IdType.AUTO)
     private Integer id;
 
     /**
@@ -30,11 +32,13 @@ public class AdminRoleBo {
     /**
      * 创建时间
      */
+    @TableField(updateStrategy = FieldStrategy.NEVER)
     private Date createTime;
 
     /**
      * 更新时间
      */
+    @TableField(updateStrategy = FieldStrategy.NOT_NULL)
     private Date updateTime;
 
     /**

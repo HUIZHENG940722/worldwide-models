@@ -1,12 +1,12 @@
 package com.ethan.worldwide.account.admin.application.service;
 
 import cn.hutool.crypto.digest.BCrypt;
-import com.ethan.worldwide.account.admin.domain.bo.role.AdminRoleBo;
-import com.ethan.worldwide.account.admin.domain.bo.user.AdminUserBo;
-import com.ethan.worldwide.account.admin.domain.bo.user.LoginAdminUserBo;
-import com.ethan.worldwide.account.admin.domain.bo.user.QueryAdminUserBo;
-import com.ethan.worldwide.account.admin.domain.service.AdminRoleDomainService;
-import com.ethan.worldwide.account.admin.domain.service.AdminUserDomainService;
+import com.ethan.worldwide.account.admin.domain.bo.role.SystemRoleBo;
+import com.ethan.worldwide.account.admin.domain.bo.user.SystemUserBo;
+import com.ethan.worldwide.account.admin.domain.bo.user.LoginSystemUserBo;
+import com.ethan.worldwide.account.admin.domain.bo.user.QuerySystemUserBo;
+import com.ethan.worldwide.account.admin.domain.service.SystemRoleDomainService;
+import com.ethan.worldwide.account.admin.domain.service.SystemUserDomainService;
 import com.ethan.worldwide.account.admin.infra.exception.AccountAdminServiceException;
 import com.ethan.worldwide.common.bo.AuthenticationUser;
 import com.ethan.worldwide.common.config.AppConfig;
@@ -29,13 +29,13 @@ import java.util.stream.Collectors;
  * @Date 2022/6/26
  */
 @Service
-public class AdminUserService implements IAuthenticationService {
+public class SystemUserService implements IAuthenticationService {
 
     @Autowired
-    private AdminUserDomainService adminUserDomainService;
+    private SystemUserDomainService systemUserDomainService;
 
     @Autowired
-    private AdminRoleDomainService adminRoleDomainService;
+    private SystemRoleDomainService systemRoleDomainService;
 
     @Autowired
     private AppConfig appConfig;
@@ -45,46 +45,46 @@ public class AdminUserService implements IAuthenticationService {
         // 1 校验
         // 2 业务
         // 2.1 获取用户基本信息
-        QueryAdminUserBo queryAdminUserBo = new QueryAdminUserBo();
-        queryAdminUserBo.setUsername(username);
-        AdminUserBo byName = adminUserDomainService.get(queryAdminUserBo);
+        QuerySystemUserBo querySystemUserBo = new QuerySystemUserBo();
+        querySystemUserBo.setUsername(username);
+        SystemUserBo byName = systemUserDomainService.get(querySystemUserBo);
         AuthenticationUser authenticationUser = new AuthenticationUser();
         authenticationUser.setUsername(byName.getUsername());
         authenticationUser.setPassword(byName.getPassword());
         authenticationUser.setIsEnable(byName.getStatus().equals(1));
         // 2.2 获取用户的角色信息
-        List<AdminRoleBo> contentAdminRoleBos = adminRoleDomainService.listByUserId(byName.getId());
-        List<String> collect = contentAdminRoleBos.stream().map(AdminRoleBo::getName).collect(Collectors.toList());
+        List<SystemRoleBo> contentSystemRoleBos = systemRoleDomainService.listByUserId(byName.getId());
+        List<String> collect = contentSystemRoleBos.stream().map(SystemRoleBo::getName).collect(Collectors.toList());
         authenticationUser.setRoles(collect);
         // 3 返回结果信息
         return authenticationUser;
     }
 
-    public Integer sysAdminAddAdminUser(Integer sysAdminUserId, AdminUserBo adminUserBo) {
+    public Integer sysAdminAddAdminUser(Integer sysAdminUserId, SystemUserBo systemUserBo) {
         // 1 校验
         // 1.1 验证是否是系统管理员
-        QueryAdminUserBo queryById = new QueryAdminUserBo();
+        QuerySystemUserBo queryById = new QuerySystemUserBo();
         queryById.setId(sysAdminUserId);
-        AdminUserBo byId = adminUserDomainService.get(queryById);
+        SystemUserBo byId = systemUserDomainService.get(queryById);
         if (!appConfig.getUsername().equals(byId.getUsername())) {
             AccountAdminServiceException.assertException(HttpStatus.CONFLICT, "只有系统管理员可以创建后台用户");
         }
         // 2 业务
-        return adminUserDomainService.create(adminUserBo);
+        return systemUserDomainService.create(systemUserBo);
         // 3 返回结果
     }
 
-    public String login(LoginAdminUserBo loginAdminUserBo) {
+    public String login(LoginSystemUserBo loginSystemUserBo) {
         // 1 校验
         // 2 业务
         // 2.1 获取认证用户信息
-        UserDetails userDetails = loadUserByUsername(loginAdminUserBo.getUsername());
+        UserDetails userDetails = loadUserByUsername(loginSystemUserBo.getUsername());
         // 2.1.1 验证用户是否存在
         if (userDetails == null) {
             AccountAdminServiceException.assertException(HttpStatus.NOT_FOUND, "用户不存在");
         }
         // 2.1.2 验证密码是否正确
-        if (!BCrypt.checkpw(loginAdminUserBo.getPassword(), userDetails.getPassword())) {
+        if (!BCrypt.checkpw(loginSystemUserBo.getPassword(), userDetails.getPassword())) {
             AccountAdminServiceException.assertException(HttpStatus.CONFLICT, "用户密码错误");
         }
         // 2.2 生成token信息

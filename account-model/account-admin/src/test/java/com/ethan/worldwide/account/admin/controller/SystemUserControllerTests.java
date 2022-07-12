@@ -11,7 +11,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
  * @Description 后台用户单元测试
  * @Date 2022/7/4
  */
-public class AdminUserControllerTests extends AccountAdminApplicationTests {
+public class SystemUserControllerTests extends AccountAdminApplicationTests {
 
     @Test
     public void loginSuccessTest() throws Exception {

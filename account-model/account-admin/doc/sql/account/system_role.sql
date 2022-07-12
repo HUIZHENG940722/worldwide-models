@@ -1,5 +1,4 @@
-drop table if exists admin_role;
-create table if not exists admin_role
+create table if not exists system_role
 (
     id          int auto_increment comment '角色编码'
         primary key,
@@ -12,5 +11,6 @@ create table if not exists admin_role
         unique (id),
     constraint admin_role_name_uindex
         unique (name)
-);
+)
+    comment '后台管理员角色表';
 

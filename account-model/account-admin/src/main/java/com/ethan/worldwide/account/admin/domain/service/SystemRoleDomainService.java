@@ -1,8 +1,8 @@
 package com.ethan.worldwide.account.admin.domain.service;
 
-import com.ethan.worldwide.account.admin.domain.bo.role.AdminRoleBo;
-import com.ethan.worldwide.account.admin.domain.bo.role.QueryAdminRoleBo;
-import com.ethan.worldwide.account.admin.domain.repository.AdminRoleRepository;
+import com.ethan.worldwide.account.admin.domain.bo.role.SystemRoleBo;
+import com.ethan.worldwide.account.admin.domain.bo.role.QuerySystemRoleBo;
+import com.ethan.worldwide.account.admin.domain.repository.SystemRoleRepository;
 import com.ethan.worldwide.account.admin.infra.exception.AccountAdminServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,42 +17,42 @@ import java.util.List;
  * @Date 2022/6/30
  */
 @Service
-public class AdminRoleDomainService {
+public class SystemRoleDomainService {
 
     @Autowired
-    private AdminRoleRepository adminRoleRepository;
+    private SystemRoleRepository systemRoleRepository;
 
     /**
      * 创建后台用户角色
      *
-     * @param adminRoleBo
+     * @param systemRoleBo
      * @return
      */
     @Transactional
-    public Integer create(AdminRoleBo adminRoleBo) {
+    public Integer create(SystemRoleBo systemRoleBo) {
         // 1 核心校验
         // 1.1 角色名称是否重复
-        QueryAdminRoleBo queryAdminRoleBo = new QueryAdminRoleBo();
-        queryAdminRoleBo.setName(adminRoleBo.getName());
-        AdminRoleBo byName = adminRoleRepository.get(queryAdminRoleBo);
+        QuerySystemRoleBo querySystemRoleBo = new QuerySystemRoleBo();
+        querySystemRoleBo.setName(systemRoleBo.getName());
+        SystemRoleBo byName = systemRoleRepository.get(querySystemRoleBo);
         if (byName != null) {
             AccountAdminServiceException.assertException(HttpStatus.CONFLICT, "角色名称重复");
         }
         // 2 核心业务
-        return adminRoleRepository.add(adminRoleBo);
+        return systemRoleRepository.add(systemRoleBo);
         // 3 返回结果
     }
 
     /**
      * 获取后台用户角色内容
      *
-     * @param queryAdminRoleBo
+     * @param querySystemRoleBo
      * @return
      */
-    public AdminRoleBo get(QueryAdminRoleBo queryAdminRoleBo) {
+    public SystemRoleBo get(QuerySystemRoleBo querySystemRoleBo) {
         // 1 核心校验
         // 2 核心业务
-        return adminRoleRepository.get(queryAdminRoleBo);
+        return systemRoleRepository.get(querySystemRoleBo);
         // 3 返回结果
     }
 
@@ -62,10 +62,10 @@ public class AdminRoleDomainService {
      * @param userId
      * @return
      */
-    public List<AdminRoleBo> listByUserId(Integer userId) {
+    public List<SystemRoleBo> listByUserId(Integer userId) {
         // 1 核心校验
         // 2 核心业务
-        return adminRoleRepository.listByUserId(userId);
+        return systemRoleRepository.listByUserId(userId);
         // 3 返回结果
     }
 }

@@ -1,6 +1,6 @@
 package com.ethan.worldwide.account.admin.inter.controller;
 
-import com.ethan.worldwide.account.admin.application.service.AdminRoleService;
+import com.ethan.worldwide.account.admin.application.service.SystemRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.RestController;
  * @Date 2022/6/30
  */
 @RestController
-public class AdminRoleController {
+public class SystemRoleController {
 
     @Autowired
-    private AdminRoleService adminRoleService;
+    private SystemRoleService systemRoleService;
 
 
 }

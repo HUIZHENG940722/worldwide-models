@@ -8,5 +8,5 @@ import org.mapstruct.Mapper;
  * @Date 2022/6/30
  */
 @Mapper
-public interface AdminRoleDtoConvert {
+public interface SystemRoleDtoConvert {
 }

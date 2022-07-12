@@ -1,7 +1,7 @@
 package com.ethan.worldwide.account.admin;
 
 import cn.hutool.json.JSONUtil;
-import com.ethan.worldwide.account.admin.inter.controller.AdminUserController;
+import com.ethan.worldwide.account.admin.inter.controller.SystemUserController;
 import com.ethan.worldwide.common.config.AppConfig;
 import com.ethan.worldwide.openapi.interfaces.api.dto.LoginAdminReq;
 import org.junit.jupiter.api.BeforeEach;
@@ -23,14 +23,14 @@ public class AccountAdminApplicationTests {
     private AppConfig appConfig;
 
     @Autowired
-    private AdminUserController adminUserController;
+    private SystemUserController systemUserController;
 
     @BeforeEach
     void setUp() {
         LoginAdminReq loginAdminReq = new LoginAdminReq();
         loginAdminReq.setUsername(appConfig.getUsername());
         loginAdminReq.setPassword(appConfig.getPassword());
-        accessToken = "Bearer " + adminUserController.login(loginAdminReq).getBody();
+        accessToken = "Bearer " + systemUserController.login(loginAdminReq).getBody();
     }
 
     @Autowired
