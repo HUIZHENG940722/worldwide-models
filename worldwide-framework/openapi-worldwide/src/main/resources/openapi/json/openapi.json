@@ -22,13 +22,7 @@
       "name": "mall/product/spu"
     },
     {
-      "name": "mall/product/attr"
-    },
-    {
-      "name": "mall/product/attr/key"
-    },
-    {
-      "name": "mall/product/attr/value"
+      "name": "mall/product/property"
     },
     {
       "name": "account"
@@ -41,23 +35,24 @@
     }
   ],
   "paths": {
-    "/mall/product/attr/value/page": {
-      "get": {
-        "summary": "分页查询商品规格值",
-        "x-apifox-folder": "mall/product/attr/value",
+    "/mall/product/category": {
+      "post": {
+        "summary": "添加商品分类",
+        "x-apifox-folder": "mall/product/category",
         "x-apifox-status": "developing",
         "deprecated": false,
-        "description": "分页查询商品规格值",
-        "operationId": "pageProductAttrValue",
+        "description": "添加商品分类",
+        "operationId": "createProductCategory",
         "tags": [
-          "mall/product/attr/value"
+          "mall/product/category"
         ],
         "parameters": [],
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/PageQueryProductAttrValueReq",
+                "$ref": "#/components/schemas/CreateProductCategoryReq",
+                "title": "创建商品分类请求DTO",
                 "x-apifox-overrides": {}
               }
             }
@@ -69,53 +64,18 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PageProductAttrValueResp",
-                  "x-apifox-overrides": {}
+                  "type": "integer",
+                  "title": "商品分类id"
                 },
                 "examples": {}
               }
             }
           }
-        }
+        },
+        "x-run-in-apifox": "https://www.apifox.cn/web/project/1047329/apis/api-21814190-run"
       }
     },
     "/mall/product/category/{category_id}": {
-      "get": {
-        "summary": "获取商品分类内容",
-        "x-apifox-folder": "mall/product/category",
-        "x-apifox-status": "developing",
-        "deprecated": false,
-        "description": "获取商品分类内容",
-        "operationId": "getProductCategoryContent",
-        "tags": [
-          "mall/product/category"
-        ],
-        "parameters": [
-          {
-            "name": "category_id",
-            "in": "path",
-            "description": "商品分类编码",
-            "required": true,
-            "example": "",
-            "schema": {
-              "type": "integer"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "成功",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProductCategoryResp"
-                },
-                "examples": {}
-              }
-            }
-          }
-        }
-      },
       "put": {
         "summary": "更新商品分类",
         "x-apifox-folder": "mall/product/category",
@@ -160,103 +120,24 @@
               }
             }
           }
-        }
-      }
-    },
-    "/mall/product/attr/key/{atty_key_id}": {
-      "get": {
-        "summary": "获取商品规格键",
-        "x-apifox-folder": "mall/product/attr/key",
-        "x-apifox-status": "developing",
-        "deprecated": false,
-        "description": "获取商品规格键",
-        "operationId": "getProductAttrKey",
-        "tags": [
-          "mall/product/attr/key"
-        ],
-        "parameters": [
-          {
-            "name": "atty_key_id",
-            "in": "path",
-            "description": "商品规格键编码",
-            "required": true,
-            "example": "1",
-            "schema": {
-              "type": "integer"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "成功",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProductAttrKeyResp",
-                  "x-apifox-overrides": {}
-                },
-                "examples": {}
-              }
-            }
-          }
-        }
-      }
-    },
-    "/account/admin/login": {
-      "post": {
-        "summary": "登录获取token",
-        "x-apifox-folder": "account/admin",
-        "x-apifox-status": "developing",
-        "deprecated": false,
-        "description": "登录获取token",
-        "operationId": "Login",
-        "tags": [
-          "account/admin"
-        ],
-        "parameters": [],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/LoginAdminReq",
-                "x-apifox-overrides": {},
-                "title": "登录请求DTO"
-              }
-            }
-          }
         },
-        "responses": {
-          "200": {
-            "description": "成功",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "string",
-                  "title": "token信息"
-                },
-                "examples": {}
-              }
-            }
-          }
-        }
-      }
-    },
-    "/mall/product/attr/{attr_key_id}": {
-      "post": {
-        "summary": "创建商品规格值",
-        "x-apifox-folder": "mall/product/attr/value",
+        "x-run-in-apifox": "https://www.apifox.cn/web/project/1047329/apis/api-22003552-run"
+      },
+      "get": {
+        "summary": "获取商品分类内容",
+        "x-apifox-folder": "mall/product/category",
         "x-apifox-status": "developing",
         "deprecated": false,
-        "description": "创建商品规格值",
-        "operationId": "createProductAttrValue",
+        "description": "获取商品分类内容",
+        "operationId": "getProductCategoryContent",
         "tags": [
-          "mall/product/attr/value"
+          "mall/product/category"
         ],
         "parameters": [
           {
-            "name": "attr_key_id",
+            "name": "category_id",
             "in": "path",
-            "description": "规格键编码",
+            "description": "商品分类编码",
             "required": true,
             "example": "",
             "schema": {
@@ -264,190 +145,20 @@
             }
           }
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateProductAttrValueReq",
-                "x-apifox-overrides": {}
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "description": "成功",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "integer",
-                  "title": "规格值编码"
+                  "$ref": "#/components/schemas/ProductCategoryResp"
                 },
                 "examples": {}
-              }
-            }
-          }
-        }
-      }
-    },
-    "/mall/product/attr/key": {
-      "post": {
-        "summary": "添加商品规格键",
-        "x-apifox-folder": "mall/product/attr/key",
-        "x-apifox-status": "developing",
-        "deprecated": false,
-        "description": "添加商品规格键",
-        "operationId": "createProductAttrKey",
-        "tags": [
-          "mall/product/attr/key"
-        ],
-        "parameters": [],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateProductAttrKeyReq",
-                "x-apifox-overrides": {}
               }
             }
           }
         },
-        "responses": {
-          "200": {
-            "description": "成功",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "integer"
-                },
-                "examples": {}
-              }
-            }
-          }
-        }
-      }
-    },
-    "/mall/product/brand/page": {
-      "get": {
-        "summary": "分页查询商品品牌",
-        "x-apifox-folder": "mall/product/brand",
-        "x-apifox-status": "developing",
-        "deprecated": false,
-        "description": "分页查询商品品牌",
-        "operationId": "pageProductBrandContent",
-        "tags": [
-          "mall/product/brand"
-        ],
-        "parameters": [],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/PageQueryProductBrandReq",
-                "x-apifox-overrides": {}
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "成功",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PageProductBrandResp",
-                  "x-apifox-overrides": {}
-                },
-                "examples": {}
-              }
-            }
-          }
-        }
-      }
-    },
-    "/mall/product/spu": {
-      "post": {
-        "summary": "创建商品SPU",
-        "x-apifox-folder": "mall/product/spu",
-        "x-apifox-status": "developing",
-        "deprecated": false,
-        "description": "创建商品SPU",
-        "operationId": "createProductSpu",
-        "tags": [
-          "mall/product/spu"
-        ],
-        "parameters": [],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateProductSpuAndSkuReq",
-                "x-apifox-overrides": {}
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "成功",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "integer",
-                  "title": "商品spu编码"
-                },
-                "examples": {}
-              }
-            }
-          }
-        }
-      }
-    },
-    "/mall/product/attr/key/{attr_key_id}": {
-      "put": {
-        "summary": "更新商品规格键",
-        "x-apifox-folder": "mall/product/attr/key",
-        "x-apifox-status": "developing",
-        "deprecated": false,
-        "description": "更新商品规格键",
-        "operationId": "updateProductAttrKey",
-        "tags": [
-          "mall/product/attr/key"
-        ],
-        "parameters": [
-          {
-            "name": "attr_key_id",
-            "in": "path",
-            "description": "商品规格键编码",
-            "required": true,
-            "schema": {
-              "type": "integer"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateProductAttrKeyReq"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "成功",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "integer",
-                  "title": "更新条数"
-                },
-                "examples": {}
-              }
-            }
-          }
-        }
+        "x-run-in-apifox": "https://www.apifox.cn/web/project/1047329/apis/api-22726904-run"
       }
     },
     "/mall/product/brand": {
@@ -485,120 +196,27 @@
               }
             }
           }
-        }
+        },
+        "x-run-in-apifox": "https://www.apifox.cn/web/project/1047329/apis/api-22074057-run"
       }
     },
-    "/mall/product/attr/value/{attr_value_id}": {
-      "get": {
-        "summary": "获取商品规格值内容",
-        "x-apifox-folder": "mall/product/attr/value",
+    "/mall/product/spu": {
+      "post": {
+        "summary": "创建商品SPU",
+        "x-apifox-folder": "mall/product/spu",
         "x-apifox-status": "developing",
         "deprecated": false,
-        "description": "获取商品规格值内容",
-        "operationId": "getProductAttrValue",
+        "description": "创建商品SPU",
+        "operationId": "createProductSpu",
         "tags": [
-          "mall/product/attr/value"
-        ],
-        "parameters": [
-          {
-            "name": "attr_value_id",
-            "in": "path",
-            "description": "商品规格值编码",
-            "required": true,
-            "schema": {
-              "type": "integer"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "成功",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProductAttrValueResp"
-                },
-                "examples": {}
-              }
-            }
-          }
-        }
-      }
-    },
-    "/mall/product/attr/key/page": {
-      "get": {
-        "summary": "分页获取商品规格键内容",
-        "x-apifox-folder": "mall/product/attr/key",
-        "x-apifox-status": "developing",
-        "deprecated": false,
-        "description": "分页获取商品规格键内容",
-        "operationId": "pageProductAttrKey",
-        "tags": [
-          "mall/product/attr/key"
+          "mall/product/spu"
         ],
         "parameters": [],
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/PageQueryProductAttrKeyReq",
-                "x-apifox-overrides": {}
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "成功",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PageProductAttrKeyResp",
-                  "x-apifox-overrides": {}
-                },
-                "examples": {}
-              }
-            }
-          }
-        }
-      }
-    },
-    "/mall/product/attr/{attr_key_id}/{attr_value_id}": {
-      "put": {
-        "summary": "更新商品规格值",
-        "x-apifox-folder": "mall/product/attr/value",
-        "x-apifox-status": "developing",
-        "deprecated": false,
-        "description": "更新商品规格值",
-        "operationId": "updateProductAttrValue",
-        "tags": [
-          "mall/product/attr/value"
-        ],
-        "parameters": [
-          {
-            "name": "attr_key_id",
-            "in": "path",
-            "description": "商品规格键编码",
-            "required": true,
-            "schema": {
-              "type": "integer"
-            }
-          },
-          {
-            "name": "attr_value_id",
-            "in": "path",
-            "description": "商品规格值编码",
-            "required": true,
-            "schema": {
-              "type": "integer"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateProductAttrValueReq",
+                "$ref": "#/components/schemas/CreateProductSpuAndSkuReq",
                 "x-apifox-overrides": {}
               }
             }
@@ -611,13 +229,266 @@
               "application/json": {
                 "schema": {
                   "type": "integer",
-                  "title": ""
+                  "title": "商品spu编码"
                 },
                 "examples": {}
               }
             }
           }
-        }
+        },
+        "x-run-in-apifox": "https://www.apifox.cn/web/project/1047329/apis/api-22364106-run"
+      }
+    },
+    "/mall/product/property": {
+      "post": {
+        "summary": "添加商品规格",
+        "x-apifox-folder": "mall/product/property",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "添加商品规格",
+        "operationId": "createProductProperty",
+        "tags": [
+          "mall/product/property"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateProductPropertyReq",
+                "x-apifox-overrides": {},
+                "title": "创建商品请求规格DTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "title": "商品规格键id"
+                },
+                "examples": {}
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://www.apifox.cn/web/project/1047329/apis/api-22493652-run"
+      }
+    },
+    "/mall/product/brand/{brand_id}": {
+      "put": {
+        "summary": "更新商品品牌",
+        "x-apifox-folder": "mall/product/brand",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "更新商品品牌",
+        "operationId": "updateProductBrand",
+        "tags": [
+          "mall/product/brand"
+        ],
+        "parameters": [
+          {
+            "name": "brand_id",
+            "in": "path",
+            "description": "商品品牌编码",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateProductBrandReq",
+                "x-apifox-overrides": {},
+                "title": "更新商品品牌请求DTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer"
+                },
+                "examples": {}
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://www.apifox.cn/web/project/1047329/apis/api-22709587-run"
+      },
+      "get": {
+        "summary": "获取商品品牌内容",
+        "x-apifox-folder": "mall/product/brand",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "获取商品品牌内容",
+        "operationId": "getProductBrandContent",
+        "tags": [
+          "mall/product/brand"
+        ],
+        "parameters": [
+          {
+            "name": "brand_id",
+            "in": "path",
+            "description": "商品品牌编码",
+            "required": true,
+            "example": "1",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductBrandResp"
+                },
+                "examples": {}
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://www.apifox.cn/web/project/1047329/apis/api-22710936-run"
+      }
+    },
+    "/mall/product/brand/page": {
+      "get": {
+        "summary": "分页查询商品品牌",
+        "x-apifox-folder": "mall/product/brand",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "分页查询商品品牌",
+        "operationId": "pageProductBrandContent",
+        "tags": [
+          "mall/product/brand"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PageQueryProductBrandReq",
+                "x-apifox-overrides": {},
+                "title": "分页查询商品品牌DTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageProductBrandResp",
+                  "x-apifox-overrides": {}
+                },
+                "examples": {}
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://www.apifox.cn/web/project/1047329/apis/api-22712348-run"
+      }
+    },
+    "/mall/product/property/{property_key_id}": {
+      "put": {
+        "summary": "更新商品规格",
+        "x-apifox-folder": "mall/product/property",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "更新商品规格",
+        "operationId": "updateProductProperty",
+        "tags": [
+          "mall/product/property"
+        ],
+        "parameters": [
+          {
+            "name": "property_key_id",
+            "in": "path",
+            "description": "商品规格键编码",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateProductPropertyReq"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "title": "更新条数"
+                },
+                "examples": {}
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://www.apifox.cn/web/project/1047329/apis/api-22731276-run"
+      },
+      "get": {
+        "summary": "获取商品规格",
+        "x-apifox-folder": "mall/product/property",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "获取商品规格",
+        "operationId": "getProductProperty",
+        "tags": [
+          "mall/product/property"
+        ],
+        "parameters": [
+          {
+            "name": "property_key_id",
+            "in": "path",
+            "description": "商品规格键编码",
+            "required": true,
+            "example": "1",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductPropertyResq"
+                },
+                "examples": {}
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://www.apifox.cn/web/project/1047329/apis/api-23168167-run"
       }
     },
     "/mall/product/category/page": {
@@ -637,7 +508,8 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/PageQueryProductCategoryReq",
-                "x-apifox-overrides": {}
+                "x-apifox-overrides": {},
+                "title": "分页获取商品分类请求DTO"
               }
             }
           }
@@ -649,13 +521,93 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/PageProductCategoryResp",
+                  "x-apifox-overrides": {},
+                  "title": "商品分类分页响应数据"
+                },
+                "examples": {}
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://www.apifox.cn/web/project/1047329/apis/api-22964104-run"
+      }
+    },
+    "/mall/product/property/page": {
+      "get": {
+        "summary": "分页获取商品规格键内容",
+        "x-apifox-folder": "mall/product/property",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "分页获取商品规格",
+        "operationId": "pageProductProperty",
+        "tags": [
+          "mall/product/property"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PageQueryProductPropertyReq",
+                "x-apifox-overrides": {}
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageProductPropertyResp",
                   "x-apifox-overrides": {}
                 },
                 "examples": {}
               }
             }
           }
-        }
+        },
+        "x-run-in-apifox": "https://www.apifox.cn/web/project/1047329/apis/api-23197170-run"
+      }
+    },
+    "/account/member": {
+      "post": {
+        "summary": "创建会员用户",
+        "x-apifox-folder": "account/member",
+        "x-apifox-status": "developing",
+        "deprecated": false,
+        "description": "创建会员用户",
+        "operationId": "createMemberUser",
+        "tags": [
+          "account/member"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateMemberUserReq",
+                "x-apifox-overrides": {}
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "title": "会员编码"
+                },
+                "examples": {}
+              }
+            }
+          }
+        },
+        "x-run-in-apifox": "https://www.apifox.cn/web/project/1047329/apis/api-23857235-run"
       }
     },
     "/account/admin/{sys_admin_id}": {
@@ -703,110 +655,29 @@
               }
             }
           }
-        }
-      }
-    },
-    "/mall/product/brand/{brand_id}": {
-      "get": {
-        "summary": "获取商品品牌内容",
-        "x-apifox-folder": "mall/product/brand",
-        "x-apifox-status": "developing",
-        "deprecated": false,
-        "description": "获取商品品牌内容",
-        "operationId": "getProductBrandContent",
-        "tags": [
-          "mall/product/brand"
-        ],
-        "parameters": [
-          {
-            "name": "brand_id",
-            "in": "path",
-            "description": "商品品牌编码",
-            "required": true,
-            "example": "1",
-            "schema": {
-              "type": "integer"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "成功",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProductBrandResp"
-                },
-                "examples": {}
-              }
-            }
-          }
-        }
-      },
-      "put": {
-        "summary": "更新商品品牌",
-        "x-apifox-folder": "mall/product/brand",
-        "x-apifox-status": "developing",
-        "deprecated": false,
-        "description": "更新商品品牌",
-        "operationId": "updateProductBrand",
-        "tags": [
-          "mall/product/brand"
-        ],
-        "parameters": [
-          {
-            "name": "brand_id",
-            "in": "path",
-            "description": "商品品牌编码",
-            "required": true,
-            "example": "",
-            "schema": {
-              "type": "integer"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateProductBrandReq"
-              }
-            }
-          }
         },
-        "responses": {
-          "200": {
-            "description": "成功",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "integer"
-                },
-                "examples": {}
-              }
-            }
-          }
-        }
+        "x-run-in-apifox": "https://www.apifox.cn/web/project/1047329/apis/api-26248605-run"
       }
     },
-    "/account/member": {
+    "/account/admin/login": {
       "post": {
-        "summary": "创建会员用户",
-        "x-apifox-folder": "account/member",
+        "summary": "登录获取token",
+        "x-apifox-folder": "account/admin",
         "x-apifox-status": "developing",
         "deprecated": false,
-        "description": "创建会员用户",
-        "operationId": "createMemberUser",
+        "description": "登录获取token",
+        "operationId": "Login",
         "tags": [
-          "account/member"
+          "account/admin"
         ],
         "parameters": [],
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateMemberUserReq",
-                "x-apifox-overrides": {}
+                "$ref": "#/components/schemas/LoginAdminReq",
+                "x-apifox-overrides": {},
+                "title": "登录请求DTO"
               }
             }
           }
@@ -817,128 +688,147 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "integer",
-                  "title": "会员编码"
+                  "type": "string",
+                  "title": "token信息"
                 },
                 "examples": {}
-              }
-            }
-          }
-        }
-      }
-    },
-    "/mall/product/category": {
-      "post": {
-        "summary": "添加商品分类",
-        "x-apifox-folder": "mall/product/category",
-        "x-apifox-status": "developing",
-        "deprecated": false,
-        "description": "添加商品分类",
-        "operationId": "createProductCategory",
-        "tags": [
-          "mall/product/category"
-        ],
-        "parameters": [],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateProductCategoryReq",
-                "title": "创建商品分类请求DTO",
-                "x-apifox-overrides": {}
               }
             }
           }
         },
-        "responses": {
-          "200": {
-            "description": "成功",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "integer"
-                },
-                "examples": {}
-              }
-            }
-          }
-        }
+        "x-run-in-apifox": "https://www.apifox.cn/web/project/1047329/apis/api-27420031-run"
       }
     }
   },
   "components": {
     "schemas": {
-      "CreateProductAttrValueReq": {
+      "ProductPropertyResq": {
         "type": "object",
         "properties": {
+          "attrKey": {
+            "$ref": "#/components/schemas/ProductPropertyKeyDto",
+            "title": "商品规格键DTO",
+            "x-apifox-overrides": {}
+          },
+          "attrValueList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProductPropertyValueDto"
+            },
+            "title": "商品规格值列表"
+          }
+        },
+        "x-apifox-orders": [
+          "attrKey",
+          "attrValueList"
+        ],
+        "required": [
+          "attrKey",
+          "attrValueList"
+        ],
+        "title": "商品规格响应DTO",
+        "x-apifox-ignore-properties": [],
+        "x-apifox-folder": "mall/product/property"
+      },
+      "UpdateProductPropertyKeyDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "规格键名称"
+          },
+          "status": {
+            "$ref": "#/components/schemas/StatusEnum",
+            "title": "规格键状态"
+          }
+        },
+        "x-apifox-orders": [
+          "name",
+          "status"
+        ],
+        "x-apifox-ignore-properties": [],
+        "x-apifox-folder": "mall/product/property/key"
+      },
+      "CreateProductPropertyReq": {
+        "type": "object",
+        "properties": {
+          "attrKey": {
+            "$ref": "#/components/schemas/CreateProductPropertyKeyDto",
+            "title": "商品规格键DTO",
+            "x-apifox-overrides": {}
+          },
+          "attrValueList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CreateProductPropertyValueDto",
+              "x-apifox-overrides": {}
+            },
+            "title": "商品规格值列表"
+          }
+        },
+        "x-apifox-orders": [
+          "attrKey",
+          "attrValueList"
+        ],
+        "required": [
+          "attrKey",
+          "attrValueList"
+        ],
+        "title": "创建商品规格请求DTO",
+        "x-apifox-ignore-properties": [],
+        "x-apifox-folder": "mall/product/property"
+      },
+      "CreateProductPropertyValueDto": {
+        "type": "object",
+        "properties": {
+          "attrKeyId": {
+            "type": "string",
+            "title": "规格键id"
+          },
           "name": {
             "type": "string",
             "title": "规格值名字"
           },
           "status": {
-            "title": "状态",
-            "$ref": "#/components/schemas/StatusEnum"
+            "$ref": "#/components/schemas/StatusEnum",
+            "title": "规格键状态"
           }
         },
         "x-apifox-orders": [
+          "attrKeyId",
           "name",
           "status"
         ],
         "required": [
+          "attrKeyId",
           "name",
           "status"
         ],
         "x-apifox-ignore-properties": [],
-        "x-apifox-folder": "mall/product/attr/value"
+        "x-apifox-folder": "mall/product/property/propertyvalue"
       },
-      "ProductAttrValueResp": {
+      "CreateProductPropertyKeyDto": {
         "type": "object",
         "properties": {
-          "id": {
-            "type": "integer",
-            "title": "规格值编号"
-          },
-          "attrKeyId": {
-            "type": "integer",
-            "title": "规格键编码"
-          },
           "name": {
             "type": "string",
-            "title": "规格值名称"
+            "title": "规格名称"
           },
           "status": {
-            "title": "状态",
-            "$ref": "#/components/schemas/StatusEnum"
+            "$ref": "#/components/schemas/StatusEnum",
+            "title": "规格键状态"
           }
         },
         "x-apifox-orders": [
-          "id",
-          "attrKeyId",
           "name",
           "status"
         ],
         "required": [
-          "id",
-          "attrKeyId",
           "name",
           "status"
         ],
         "x-apifox-ignore-properties": [],
-        "x-apifox-folder": "mall/product/attr/value"
-      },
-      "StatusEnum": {
-        "type": "integer",
-        "enum": [
-          0,
-          1
-        ],
-        "x-apifox": {
-          "enumDescriptions": {
-            "0": "关闭",
-            "1": "开启"
-          }
-        },
-        "x-apifox-folder": "enums"
+        "x-apifox-folder": "mall/product/property/key"
       },
       "LoginAdminReq": {
         "type": "object",
@@ -963,6 +853,254 @@
         "x-apifox-ignore-properties": [],
         "x-apifox-folder": "account/admin"
       },
+      "AddAdminReq": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "title": "用户账号"
+          },
+          "password": {
+            "type": "string",
+            "title": "用户密码"
+          }
+        },
+        "x-apifox-orders": [
+          "username",
+          "password"
+        ],
+        "required": [
+          "username",
+          "password"
+        ],
+        "x-apifox-ignore-properties": [],
+        "x-apifox-folder": "account/admin"
+      },
+      "CreateMemberUserReq": {
+        "type": "object",
+        "properties": {
+          "mobile": {
+            "type": "string",
+            "title": "手机号码",
+            "pattern": "^1[3-9]\\d{9}$"
+          },
+          "password": {
+            "type": "string",
+            "title": "密码"
+          },
+          "ip": {
+            "type": "string",
+            "title": "IP地址"
+          }
+        },
+        "x-apifox-orders": [
+          "mobile",
+          "password",
+          "ip"
+        ],
+        "required": [
+          "mobile",
+          "ip"
+        ],
+        "x-apifox-ignore-properties": [],
+        "x-apifox-folder": "account/member"
+      },
+      "ProductPropertyValueDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "title": "规格值编号"
+          },
+          "attrKeyId": {
+            "type": "integer",
+            "title": "规格键编码"
+          },
+          "name": {
+            "type": "string",
+            "title": "规格值名称"
+          },
+          "status": {
+            "$ref": "#/components/schemas/StatusEnum",
+            "title": "规格键状态"
+          }
+        },
+        "x-apifox-orders": [
+          "id",
+          "attrKeyId",
+          "name",
+          "status"
+        ],
+        "required": [
+          "id",
+          "attrKeyId",
+          "name",
+          "status"
+        ],
+        "x-apifox-ignore-properties": [],
+        "x-apifox-folder": "mall/product/property/propertyvalue"
+      },
+      "UpdateProductPropertyValueDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "规格值名称"
+          },
+          "status": {
+            "$ref": "#/components/schemas/StatusEnum",
+            "title": "规格键状态"
+          },
+          "id": {
+            "type": "string",
+            "title": "规格值id"
+          }
+        },
+        "x-apifox-orders": [
+          "name",
+          "status",
+          "id"
+        ],
+        "required": [
+          "id"
+        ],
+        "title": "更新商品规格值请求DTO",
+        "x-apifox-ignore-properties": [],
+        "x-apifox-folder": "mall/product/property/propertyvalue"
+      },
+      "PageQueryProductPropertyReq": {
+        "type": "object",
+        "properties": {
+          "pageNo": {
+            "type": "integer",
+            "title": "页码"
+          },
+          "pageSize": {
+            "type": "integer",
+            "title": "页面大小"
+          },
+          "name": {
+            "type": "string",
+            "title": "规格键名称"
+          },
+          "status": {
+            "$ref": "#/components/schemas/StatusEnum",
+            "title": "规格键状态"
+          }
+        },
+        "x-apifox-orders": [
+          "pageNo",
+          "pageSize",
+          "name",
+          "status"
+        ],
+        "required": [
+          "pageNo",
+          "pageSize"
+        ],
+        "x-apifox-ignore-properties": [],
+        "x-apifox-folder": "mall/product/property"
+      },
+      "PageProductPropertyResp": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "integer",
+            "title": "数据条数"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProductPropertyResq"
+            },
+            "title": "商品规格数据集"
+          }
+        },
+        "x-apifox-orders": [
+          "total",
+          "data"
+        ],
+        "required": [
+          "total",
+          "data"
+        ],
+        "x-apifox-ignore-properties": [],
+        "x-apifox-folder": "mall/product/property"
+      },
+      "ProductPropertyKeyDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "title": "商品规格键编码"
+          },
+          "name": {
+            "type": "string",
+            "title": "规格键名称"
+          },
+          "status": {
+            "$ref": "#/components/schemas/StatusEnum",
+            "title": "规格键状态"
+          },
+          "deleted": {
+            "$ref": "#/components/schemas/DeletedEnum",
+            "title": "是否删除"
+          },
+          "createTime": {
+            "type": "string",
+            "title": "创建时间"
+          },
+          "updateTime": {
+            "type": "string",
+            "title": "更新时间"
+          }
+        },
+        "x-apifox-orders": [
+          "id",
+          "name",
+          "status",
+          "deleted",
+          "createTime",
+          "updateTime"
+        ],
+        "required": [
+          "id",
+          "name",
+          "status",
+          "deleted",
+          "createTime"
+        ],
+        "x-apifox-ignore-properties": [],
+        "x-apifox-folder": "mall/product/property/key"
+      },
+      "DeletedEnum": {
+        "type": "integer",
+        "enum": [
+          0,
+          1
+        ],
+        "x-apifox": {
+          "enumDescriptions": {
+            "0": "已删除",
+            "1": "未删除"
+          }
+        },
+        "x-apifox-folder": "enums"
+      },
+      "StatusEnum": {
+        "type": "integer",
+        "enum": [
+          0,
+          1
+        ],
+        "x-apifox": {
+          "enumDescriptions": {
+            "0": "关闭",
+            "1": "开启"
+          }
+        },
+        "x-apifox-folder": "enums"
+      },
       "PageProductCategoryResp": {
         "type": "object",
         "properties": {
@@ -985,6 +1123,49 @@
         "required": [
           "total",
           "data"
+        ],
+        "x-apifox-ignore-properties": [],
+        "x-apifox-folder": "mall/product/category"
+      },
+      "PageQueryProductCategoryReq": {
+        "type": "object",
+        "properties": {
+          "pageNo": {
+            "type": "integer",
+            "title": "页码"
+          },
+          "pageSize": {
+            "type": "integer",
+            "title": "页面大小"
+          },
+          "id": {
+            "type": "integer",
+            "title": "分类编码"
+          },
+          "pid": {
+            "type": "integer",
+            "title": "分类父编码"
+          },
+          "name": {
+            "type": "string",
+            "title": "分类名称"
+          },
+          "status": {
+            "$ref": "#/components/schemas/StatusEnum",
+            "title": "规格键状态"
+          }
+        },
+        "x-apifox-orders": [
+          "pageNo",
+          "pageSize",
+          "id",
+          "pid",
+          "name",
+          "status"
+        ],
+        "required": [
+          "pageNo",
+          "pageSize"
         ],
         "x-apifox-ignore-properties": [],
         "x-apifox-folder": "mall/product/category"
@@ -1024,148 +1205,34 @@
         ],
         "x-apifox-folder": "mall/product/sku"
       },
-      "DeletedEnum": {
-        "type": "integer",
-        "enum": [
-          0,
-          1
-        ],
-        "x-apifox": {
-          "enumDescriptions": {
-            "0": "已删除",
-            "1": "未删除"
-          }
-        },
-        "x-apifox-folder": "enums"
-      },
-      "AddAdminReq": {
+      "UpdateProductPropertyReq": {
+        "title": "更新商品规格请求DTO",
         "type": "object",
         "properties": {
-          "username": {
-            "type": "string",
-            "title": "用户账号"
-          },
-          "password": {
-            "type": "string",
-            "title": "用户密码"
-          }
-        },
-        "x-apifox-orders": [
-          "username",
-          "password"
-        ],
-        "required": [
-          "username",
-          "password"
-        ],
-        "x-apifox-ignore-properties": [],
-        "x-apifox-folder": "account/admin"
-      },
-      "UpdateProductCategoryReq": {
-        "type": "object",
-        "properties": {
-          "pid": {
-            "type": "integer",
-            "title": "父分类编码"
-          },
-          "name": {
-            "type": "string",
-            "title": "分类名称",
-            "minLength": 1
-          },
-          "description": {
-            "type": "string",
-            "title": "分类描述"
-          },
-          "picUrl": {
-            "type": "string",
-            "title": "分类图片"
-          },
-          "sort": {
-            "type": "integer",
-            "title": "分类排序"
-          },
-          "status": {
-            "title": "状态",
-            "$ref": "#/components/schemas/StatusEnum"
-          }
-        },
-        "x-apifox-orders": [
-          "pid",
-          "name",
-          "description",
-          "picUrl",
-          "sort",
-          "status"
-        ],
-        "x-apifox-ignore-properties": [],
-        "x-apifox-folder": "mall/product/category"
-      },
-      "UpdateProductAttrKeyReq": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string",
-            "title": "规格键名称",
-            "minLength": 1
-          },
-          "status": {
-            "title": "状态",
-            "$ref": "#/components/schemas/StatusEnum"
-          }
-        },
-        "x-apifox-orders": [
-          "name",
-          "status"
-        ],
-        "x-apifox-ignore-properties": [],
-        "x-apifox-folder": "mall/product/attr/key"
-      },
-      "PageProductAttrKeyResp": {
-        "type": "object",
-        "properties": {
-          "total": {
-            "type": "integer",
-            "title": "数据条数"
-          },
-          "data": {
+          "attrValueList": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/ProductAttrKeyResp",
+              "$ref": "#/components/schemas/UpdateProductPropertyValueDto",
               "x-apifox-overrides": {}
             },
-            "title": "商品规格键数据集"
+            "title": "商品规格键"
+          },
+          "attrKey": {
+            "title": "更新商品规格值列表",
+            "$ref": "#/components/schemas/UpdateProductPropertyKeyDto",
+            "x-apifox-overrides": {}
           }
         },
         "x-apifox-orders": [
-          "total",
-          "data"
+          "attrValueList",
+          "attrKey"
         ],
         "required": [
-          "total",
-          "data"
+          "attrKey",
+          "attrValueList"
         ],
         "x-apifox-ignore-properties": [],
-        "x-apifox-folder": "mall/product/attr/key"
-      },
-      "UpdateProductAttrValueReq": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string",
-            "title": "规格值名称"
-          },
-          "status": {
-            "title": "状态",
-            "$ref": "#/components/schemas/StatusEnum"
-          }
-        },
-        "x-apifox-orders": [
-          "name",
-          "status"
-        ],
-        "x-apifox-ignore-properties": [],
-        "x-apifox-folder": "mall/product/attr/value"
+        "x-apifox-folder": "mall/product/property"
       },
       "ProductCategoryResp": {
         "type": "object",
@@ -1195,13 +1262,12 @@
             "title": "商品分类排序"
           },
           "status": {
-            "title": "状态",
-            "$ref": "#/components/schemas/StatusEnum"
+            "$ref": "#/components/schemas/StatusEnum",
+            "title": "规格键状态"
           },
           "deleted": {
-            "title": "是否被删除",
-            "description": "0->已删除;1->未删除;",
-            "$ref": "#/components/schemas/DeletedEnum"
+            "$ref": "#/components/schemas/DeletedEnum",
+            "title": "是否删除"
           },
           "createTime": {
             "type": "string",
@@ -1236,115 +1302,6 @@
         "x-apifox-ignore-properties": [],
         "x-apifox-folder": "mall/product/category"
       },
-      "ProductAttrKeyResp": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "title": "商品规格键编码"
-          },
-          "name": {
-            "type": "string",
-            "title": "规格键名称"
-          },
-          "status": {
-            "title": "状态",
-            "$ref": "#/components/schemas/StatusEnum"
-          },
-          "deleted": {
-            "title": "是否被删除",
-            "description": "0->已删除;1->未删除;",
-            "$ref": "#/components/schemas/DeletedEnum"
-          },
-          "createTime": {
-            "type": "string",
-            "title": "创建时间"
-          },
-          "updateTime": {
-            "type": "string",
-            "title": "更新时间"
-          }
-        },
-        "x-apifox-orders": [
-          "id",
-          "name",
-          "status",
-          "deleted",
-          "createTime",
-          "updateTime"
-        ],
-        "required": [
-          "id",
-          "name",
-          "status",
-          "deleted",
-          "createTime"
-        ],
-        "x-apifox-ignore-properties": [],
-        "x-apifox-folder": "mall/product/attr/key"
-      },
-      "CreateMemberUserReq": {
-        "type": "object",
-        "properties": {
-          "mobile": {
-            "type": "string",
-            "title": "手机号码",
-            "pattern": "^1[3-9]\\d{9}$"
-          },
-          "password": {
-            "type": "string",
-            "title": "密码"
-          },
-          "ip": {
-            "type": "string",
-            "title": "IP地址"
-          }
-        },
-        "x-apifox-orders": [
-          "mobile",
-          "password",
-          "ip"
-        ],
-        "required": [
-          "mobile",
-          "ip"
-        ],
-        "x-apifox-ignore-properties": [],
-        "x-apifox-folder": "account/member"
-      },
-      "PageQueryProductAttrKeyReq": {
-        "type": "object",
-        "properties": {
-          "pageNo": {
-            "type": "integer",
-            "title": "页码"
-          },
-          "pageSize": {
-            "type": "integer",
-            "title": "页面大小"
-          },
-          "name": {
-            "type": "string",
-            "title": "规格键名称"
-          },
-          "status": {
-            "title": "状态",
-            "$ref": "#/components/schemas/StatusEnum"
-          }
-        },
-        "x-apifox-orders": [
-          "pageNo",
-          "pageSize",
-          "name",
-          "status"
-        ],
-        "required": [
-          "pageNo",
-          "pageSize"
-        ],
-        "x-apifox-ignore-properties": [],
-        "x-apifox-folder": "mall/product/attr/key"
-      },
       "PageQueryProductBrandReq": {
         "type": "object",
         "properties": {
@@ -1367,8 +1324,8 @@
             "title": "品牌名称"
           },
           "status": {
-            "title": "状态",
-            "$ref": "#/components/schemas/StatusEnum"
+            "$ref": "#/components/schemas/StatusEnum",
+            "title": "规格键状态"
           }
         },
         "required": [
@@ -1385,104 +1342,117 @@
         "x-apifox-ignore-properties": [],
         "x-apifox-folder": "mall/product/brand"
       },
-      "PageQueryProductCategoryReq": {
+      "PageProductBrandResp": {
         "type": "object",
         "properties": {
-          "pageNo": {
+          "total": {
             "type": "integer",
-            "title": "页码"
+            "title": "条数"
           },
-          "pageSize": {
-            "type": "integer",
-            "title": "页面大小"
-          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProductBrandResp"
+            },
+            "title": "商品品牌内容数据集"
+          }
+        },
+        "required": [
+          "total",
+          "data"
+        ],
+        "x-apifox-ignore-properties": [],
+        "x-apifox-orders": [
+          "total",
+          "data"
+        ],
+        "x-apifox-folder": "mall/product/brand"
+      },
+      "ProductBrandResp": {
+        "type": "object",
+        "properties": {
           "id": {
             "type": "integer",
-            "title": "分类编码"
-          },
-          "pid": {
-            "type": "integer",
-            "title": "分类父编码"
+            "title": "品牌编码"
           },
           "name": {
             "type": "string",
-            "title": "分类名称"
+            "title": "品牌名称"
+          },
+          "description": {
+            "type": "string",
+            "title": "品牌描述"
+          },
+          "picUrl": {
+            "type": "string",
+            "title": "品牌图片"
           },
           "status": {
-            "title": "状态",
-            "$ref": "#/components/schemas/StatusEnum"
+            "$ref": "#/components/schemas/StatusEnum",
+            "title": "规格键状态"
+          },
+          "deleted": {
+            "$ref": "#/components/schemas/DeletedEnum",
+            "title": "是否删除"
+          },
+          "createTime": {
+            "type": "string",
+            "title": "创建时间"
+          },
+          "updateTime": {
+            "type": "string",
+            "title": "更新时间"
           }
         },
-        "x-apifox-orders": [
-          "pageNo",
-          "pageSize",
+        "required": [
           "id",
-          "pid",
           "name",
-          "status"
+          "status",
+          "deleted",
+          "createTime"
         ],
-        "required": [
-          "pageNo",
-          "pageSize"
+        "x-apifox-orders": [
+          "id",
+          "name",
+          "description",
+          "picUrl",
+          "status",
+          "deleted",
+          "createTime",
+          "updateTime"
         ],
         "x-apifox-ignore-properties": [],
-        "x-apifox-folder": "mall/product/category"
+        "x-apifox-folder": "mall/product/brand"
       },
-      "PageQueryProductAttrValueReq": {
+      "UpdateProductBrandReq": {
         "type": "object",
         "properties": {
-          "pageNo": {
-            "type": "integer",
-            "title": "页码"
-          },
-          "pageSize": {
-            "type": "integer",
-            "title": "页面大小"
-          },
-          "attrKeyId": {
-            "type": "integer",
-            "title": "规格值编码"
-          },
           "name": {
             "type": "string",
-            "title": "规格名称"
+            "title": "品牌名称",
+            "minLength": 1
+          },
+          "description": {
+            "type": "string",
+            "title": "品牌描述"
+          },
+          "picUrl": {
+            "type": "string",
+            "title": "品牌名图片"
           },
           "status": {
-            "title": "状态",
-            "$ref": "#/components/schemas/StatusEnum"
+            "$ref": "#/components/schemas/StatusEnum",
+            "title": "规格键状态"
           }
         },
         "x-apifox-orders": [
-          "pageNo",
-          "pageSize",
-          "attrKeyId",
           "name",
+          "description",
+          "picUrl",
           "status"
         ],
-        "required": [
-          "pageNo",
-          "pageSize"
-        ],
         "x-apifox-ignore-properties": [],
-        "x-apifox-folder": "mall/product/attr/value"
-      },
-      "CreateProductAttrKeyReq": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string",
-            "title": "规格键名称",
-            "minLength": 1
-          }
-        },
-        "x-apifox-orders": [
-          "name"
-        ],
-        "required": [
-          "name"
-        ],
-        "x-apifox-ignore-properties": [],
-        "x-apifox-folder": "mall/product/attr/key"
+        "x-apifox-folder": "mall/product/brand"
       },
       "CreateProductSpuAndSkuReq": {
         "type": "object",
@@ -1569,34 +1539,50 @@
         "required": [
           "name"
         ],
+        "title": "创建商品品牌DTO",
         "x-apifox-ignore-properties": [],
         "x-apifox-folder": "mall/product/brand"
       },
-      "PageProductAttrValueResp": {
+      "UpdateProductCategoryReq": {
         "type": "object",
         "properties": {
-          "total": {
+          "pid": {
             "type": "integer",
-            "title": "条数"
+            "title": "父分类编码"
           },
-          "data": {
-            "title": "规格值集",
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ProductAttrValueResp"
-            }
+          "name": {
+            "type": "string",
+            "title": "分类名称",
+            "minLength": 1
+          },
+          "description": {
+            "type": "string",
+            "title": "分类描述"
+          },
+          "picUrl": {
+            "type": "string",
+            "title": "分类图片"
+          },
+          "sort": {
+            "type": "integer",
+            "title": "分类排序"
+          },
+          "status": {
+            "$ref": "#/components/schemas/StatusEnum",
+            "title": "规格键状态"
           }
         },
         "x-apifox-orders": [
-          "total",
-          "data"
+          "pid",
+          "name",
+          "description",
+          "picUrl",
+          "sort",
+          "status"
         ],
-        "required": [
-          "total",
-          "data"
-        ],
+        "title": "更新商品分类请求DTO",
         "x-apifox-ignore-properties": [],
-        "x-apifox-folder": "mall/product/attr/value"
+        "x-apifox-folder": "mall/product/category"
       },
       "CreateProductCategoryReq": {
         "type": "object",
@@ -1637,121 +1623,9 @@
           "picUrl",
           "sort"
         ],
+        "title": "创建商品分类请求DTO",
         "x-apifox-ignore-properties": [],
         "x-apifox-folder": "mall/product/category"
-      },
-      "UpdateProductBrandReq": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string",
-            "title": "品牌名称",
-            "minLength": 1
-          },
-          "description": {
-            "type": "string",
-            "title": "品牌描述"
-          },
-          "picUrl": {
-            "type": "string",
-            "title": "品牌名图片"
-          },
-          "status": {
-            "title": "状态",
-            "$ref": "#/components/schemas/StatusEnum"
-          }
-        },
-        "x-apifox-orders": [
-          "name",
-          "description",
-          "picUrl",
-          "status"
-        ],
-        "x-apifox-ignore-properties": [],
-        "x-apifox-folder": "mall/product/brand"
-      },
-      "ProductBrandResp": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "title": "品牌编码"
-          },
-          "name": {
-            "type": "string",
-            "title": "品牌名称"
-          },
-          "description": {
-            "type": "string",
-            "title": "品牌描述"
-          },
-          "picUrl": {
-            "type": "string",
-            "title": "品牌图片"
-          },
-          "status": {
-            "title": "状态",
-            "$ref": "#/components/schemas/StatusEnum"
-          },
-          "deleted": {
-            "title": "是否被删除",
-            "description": "0->已删除;1->未删除;",
-            "$ref": "#/components/schemas/DeletedEnum"
-          },
-          "createTime": {
-            "type": "string",
-            "title": "创建时间"
-          },
-          "updateTime": {
-            "type": "string",
-            "title": "更新时间"
-          }
-        },
-        "required": [
-          "id",
-          "name",
-          "status",
-          "deleted",
-          "createTime"
-        ],
-        "x-apifox-orders": [
-          "id",
-          "name",
-          "description",
-          "picUrl",
-          "status",
-          "deleted",
-          "createTime",
-          "updateTime"
-        ],
-        "x-apifox-ignore-properties": [],
-        "x-apifox-folder": "mall/product/brand"
-      },
-      "PageProductBrandResp": {
-        "type": "object",
-        "properties": {
-          "total": {
-            "type": "integer",
-            "title": "条数"
-          },
-          "data": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ProductBrandResp"
-            },
-            "title": "商品品牌内容数据集"
-          }
-        },
-        "required": [
-          "total",
-          "data"
-        ],
-        "x-apifox-ignore-properties": [],
-        "x-apifox-orders": [
-          "total",
-          "data"
-        ],
-        "x-apifox-folder": "mall/product/brand"
       }
     }
   }

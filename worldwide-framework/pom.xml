@@ -17,6 +17,7 @@
         <module>openapi-worldwide</module>
         <module>common-worldwide</module>
         <module>eureka-worldwide</module>
+        <module>gateway-worldwide</module>
     </modules>
 
     <properties>
